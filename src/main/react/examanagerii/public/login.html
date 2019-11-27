@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Examanager</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="icon.png">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+</head>
+<style>
+    .w3-input {
+        background-color: transparent;
+    }
+    input:focus{
+        border-bottom: 1px solid #3f51b5;
+    }
+    .green {
+        background-color: #286b0c;
+        color: #dddddd;
+    }
+</style>
+<body>
+<div class="w3-card-4 w3-margin-top w3-animate-opacity" style="width:40rem; margin:auto">
+    <div class="w3-container green">
+        <h2>Examanager-Login</h2>
+    </div>
+    <form class="w3-container" name="loginForm" method="POST" action="/perform_login">
+        <p>
+            <label>Nutzername</label>
+            <input class="w3-input" title="username" name="username" type="text" autofocus/>
+        </p>
+        <p>
+            <label>Passwort</label>
+            <input class="w3-input" title="password" name="password" type="password"/>
+        </p>
+        <p>
+            <button
+                    class="w3-button green"
+                    type="submit">
+                <i class="fas fa-sign-in-alt"></i> Anmelden
+            </button>
+        </p>
+    </form>
+    <div class="w3-red" id="error"></div>
+
+
+</div>
+<div class="w3-bar green opacity justify-between" style="position: fixed; bottom: 0; display: flex">
+    <a class="w3-button w3-padding" href="mailto:b.lueken.winkels@gmail.com">Probleme bei der Anmeldung? <i class="fas fa-envelope"></i> Email</a>
+</div>
+<script>
+    window.onload = function () {
+        const errorMsg = window.location.search;
+        if (errorMsg === '?error') {
+            document.getElementById("error").innerText =
+                "Nutzername oder Passwort falsch";
+            document.getElementById("error").classList.add("w3-padding");
+        }
+    }
+
+</script>
+</body>
+
+</html>
