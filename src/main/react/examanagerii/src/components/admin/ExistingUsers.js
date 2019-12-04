@@ -29,6 +29,7 @@ const ExistingUsers = ({}) => {
             .catch(err => alert(err));
 
     const deleteUser = (username) =>
+        window.confirm(`Nutzer ${username} löschen?`) &&
         axios.delete("/api/user/delete/" + username)
             .then(res => setUsers(res.data))
             .catch(err => alert(err));
@@ -40,7 +41,7 @@ const ExistingUsers = ({}) => {
      ************/
 
     return (
-        <div className={"w3-container w3-card w3-margin-top"} style={{width: 500, minHeight: 200, margin: "auto"}}>
+        <div className={"w3-container w3-card w3-margin-top animate-opacity"} style={{width: 500, minHeight: 200, margin: "auto"}}>
             <button onClick={() => getUsers()} className={"w3-button w3-small"}>Aktualisieren</button>
             <ul className={"w3-ul"}>
                 {users.map(user =>

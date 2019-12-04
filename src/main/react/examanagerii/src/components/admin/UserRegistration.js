@@ -44,7 +44,7 @@ const UserRegistration = ({}) => {
      ************/
 
     return (
-        <div className={"w3-container w3-card"} style={{width: 500, minHeight: 200, margin: "auto"}}>
+        <div className={"w3-container w3-card animate-opacity"} style={{width: 500, minHeight: 200, margin: "auto"}}>
             <div>
                 <input
                     className={"w3-input"}
