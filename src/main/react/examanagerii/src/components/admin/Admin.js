@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import axios from "axios";
 import UserRegistration from "./UserRegistration";
 import ExistingUsers from "./ExistingUsers";
 
@@ -27,7 +26,7 @@ const Admin = ({}) => {
      ************/
 
     return (
-        <div>
+        <div className={"h100"}>
             <UserRegistration/>
             <ExistingUsers/>
         </div>

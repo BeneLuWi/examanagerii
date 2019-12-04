@@ -1,8 +1,10 @@
 @import "w3.css";
 @import "checkbox";
 @import "animations";
+@import "navigation";
 
 body {
+    background-color: #0000002B;;
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -20,4 +22,8 @@ code {
 .green {
     background-color: #286b0c;
     color: #dddddd;
+}
+
+.h100 {
+    height: 100%;
 }
