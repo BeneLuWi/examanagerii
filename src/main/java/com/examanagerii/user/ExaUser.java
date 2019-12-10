@@ -3,8 +3,11 @@ package com.examanagerii.user;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Document(collection = "user")
-public class ExaUser{
+public class ExaUser {
 
     @Id
     private String id;
@@ -19,7 +22,12 @@ public class ExaUser{
     private String role;
     private Settings settings;
 
-    public ExaUser() {}
+    private List<String> exams = new ArrayList<>();
+    private List<String> students = new ArrayList<>();
+    private List<String> groups = new ArrayList<>();
+
+    public ExaUser() {
+    }
 
     public ExaUser(String username, String password, String role, Settings settings) {
         this.username = username;
@@ -46,6 +54,42 @@ public class ExaUser{
         this.settings = new Settings();
         this.settings.setColor(color);
 
+    }
+
+    public void addExam(String id) {
+        if(!exams.contains(id)) exams.add(id);
+    }
+
+    public void addGroup(String id) {
+        if(!groups.contains(id)) groups.add(id);
+    }
+
+    public void addStudent(String id) {
+        if(!students.contains(id)) students.add(id);
+    }
+
+    public List<String> getExams() {
+        return exams;
+    }
+
+    public void setExams(List<String> exams) {
+        this.exams = exams;
+    }
+
+    public List<String> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<String> students) {
+        this.students = students;
+    }
+
+    public List<String> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(List<String> groups) {
+        this.groups = groups;
     }
 
     public String getId() {

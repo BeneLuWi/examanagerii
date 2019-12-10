@@ -26,6 +26,9 @@ public class RoutingConfig implements WebMvcConfigurer {
 
         registry.addViewController("/admin")
                 .setViewName("forward:/");
+
+        registry.addViewController("/class")
+                .setViewName("forward:/");
     }
 
 }

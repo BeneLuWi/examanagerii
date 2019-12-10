@@ -15,7 +15,7 @@ const App = () => {
     return (
 
         <Router>
-            <div className={"w3-card-4 animate-top"} style={{maxWidth: 1600, minWidth: 1000 ,  height:"100vh" , margin: "auto"}}>
+            <div className={"w3-card-4 animate-top root-wrapper"}>
                 <div className={"w3-sidebar w3-blue w3-bar-block"} style={{height: "100%"}}>
                     <Link to="/" className="w3-button w3-bar-item animate-left navigation"><h3>Examanager</h3></Link>
                     <Link to={"/exam"} className={"w3-bar-item w3-button animate-left navigation"}>Klausur</Link>

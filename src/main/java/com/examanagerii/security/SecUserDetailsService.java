@@ -30,6 +30,6 @@ public class SecUserDetailsService implements UserDetailsService {
 
         List<SimpleGrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(role));
 
-        return new User(user.getUsername(), user.getPassword(), authorities);
+        return new AuthUser(user.getUsername(), user.getPassword(), authorities, user.getId());
     }
 }

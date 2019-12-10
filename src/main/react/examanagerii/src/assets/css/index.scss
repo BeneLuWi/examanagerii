@@ -19,6 +19,25 @@ code {
 }
 
 
+.content-wrapper {
+    max-width: 1000px;
+    margin: auto;
+    padding-top: 20px;
+}
+
+.root-wrapper {
+    max-width: 1600px;
+    min-width: 1000px;
+    height: 100vh;
+    margin: auto;
+}
+
+.notification {
+    position: fixed;
+    right: 50px;
+}
+
+
 .green {
     background-color: #286b0c;
     color: #dddddd;
