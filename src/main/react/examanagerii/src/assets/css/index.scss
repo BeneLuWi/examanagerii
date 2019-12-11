@@ -25,6 +25,10 @@ code {
     padding-top: 20px;
 }
 
+.clickable {
+    cursor: pointer;
+}
+
 .root-wrapper {
     max-width: 1600px;
     min-width: 1000px;
@@ -45,4 +49,9 @@ code {
 
 .h100 {
     height: 100%;
+}
+
+.d-inline-block {
+    display: inline-block;
+
 }

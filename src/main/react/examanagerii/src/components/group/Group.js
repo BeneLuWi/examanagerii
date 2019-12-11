@@ -4,6 +4,7 @@ import TextInput from "../../assets/components/TextInput";
 import Button from "../../assets/components/Button";
 import Notification from "../../assets/components/Notification";
 import axios from "axios";
+import GroupDetails from "./GroupDetails";
 
 const Group = ({}) => {
 
@@ -17,6 +18,8 @@ const Group = ({}) => {
     const [name, setName] = useState("");
     const [notification, setNotification] = useState([false, "", true]);
 
+    const [showNewGroup, setShowNewGroup] = useState(false)
+
     useEffect(() => loadGroups(), []);
 
     /***********
@@ -26,7 +29,7 @@ const Group = ({}) => {
      ************/
 
     const sendGroup = () => {
-        axios.post("/api/group/create", {name: name})
+        axios.post("/api/groups/create", {name: name})
             .then(() => {
                 setNotification([true, "Gespeichert", true]);
                 setName("");
@@ -36,9 +39,9 @@ const Group = ({}) => {
     };
 
     const loadGroups = () => {
-        axios.get("/api/group/myGroups")
+        axios.get("/api/groups/myGroups")
             .then(res => setGroups(res.data))
-            .catch(() => setNotification([true, "Fehler beim Laden", false]))
+            .catch(() => setNotification([true, "Fehler beim Laden der Klassen", false]))
     };
 
 
@@ -50,21 +53,24 @@ const Group = ({}) => {
 
     return (
         <div className={"content-wrapper animate-left"}>
-            <h2>Klassen</h2>
-
-            <div className={"animate-left-2"}>
-                <h3>Neue Klasse erstellen</h3>
-                <TextInput label={"Klassenname"} onChange={setName} value={name}/>
-                <Button label={"Speichern"} onClick={sendGroup}/>
+            <div>
+                <span className={"w3-xxlarge"}>Klassen</span>
+                <Button className={"w3-white w3-xlarge"} label={showNewGroup ?"-" : "+"} onClick={() => setShowNewGroup(!showNewGroup)}/>
             </div>
-
+            {showNewGroup &&
+                <div className={"animate-left"}>
+                    <h3>Neue Klasse erstellen</h3>
+                    <TextInput label={"Klassenname"} onChange={setName} value={name}/>
+                    <Button disabled={!name.length} label={"Speichern"} onClick={sendGroup}/>
+                </div>
+            }
 
             <div className={"animate-left-2"}>
-                <h3>Meine Klassen</h3>
+
                 <ul className={"w3-ul"}>
                     {groups.map(group =>
                         <li key={group.id} className={"animate-left"}>
-                            {group.name}
+                            <GroupDetails group={group}/>
                         </li>
                     )}
                 </ul>

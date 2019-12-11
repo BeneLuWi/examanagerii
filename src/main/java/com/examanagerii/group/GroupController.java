@@ -12,7 +12,7 @@ import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/group")
+@RequestMapping("/api/groups")
 public class GroupController {
 
     @Autowired
