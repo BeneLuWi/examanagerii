@@ -6,7 +6,7 @@ import Notification from "../../assets/components/Notification";
 import axios from "axios";
 import GroupDetails from "./GroupDetails";
 
-const Group = ({}) => {
+const Groups = ({}) => {
 
     /***********
      *
@@ -88,5 +88,5 @@ const Group = ({}) => {
 
 };
 
-Group.propTypes = {};
-export default Group
+Groups.propTypes = {};
+export default Groups

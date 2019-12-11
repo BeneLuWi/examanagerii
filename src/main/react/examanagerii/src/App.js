@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import Admin from "./components/admin/Admin";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Landing from "./components/landing/Landing";
-import Group from "./components/group/Group";
+import Groups from "./components/groups/Groups";
 import Exam from "./components/exam/Exam";
 import Statistics from "./components/statistics/Statistics";
 
@@ -29,7 +29,7 @@ const App = () => {
                         <Admin/>
                     }/>
                     <Route path={"/class"} render={() =>
-                        <Group/>
+                        <Groups/>
                     }/>
                     <Route path={"/exam"} render={() =>
                         <Exam/>
