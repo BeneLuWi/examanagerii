@@ -2,24 +2,16 @@ package com.examanagerii.result;
 
 public class Exercise {
     private String name;
-    private double points;
-    private double rating;
+    private double reached;
+    private double reachable;
 
     public Exercise() {
     }
 
-    public Exercise(String name, double points, double rating) {
+    public Exercise(String name, double reached, double reachable) {
         this.name = name;
-        this.points = points;
-        this.rating = rating;
-    }
-
-    public double getRating() {
-        return rating;
-    }
-
-    public void setRating(double rating) {
-        this.rating = rating;
+        this.reached = reached;
+        this.reachable = reachable;
     }
 
     public String getName() {
@@ -30,11 +22,19 @@ public class Exercise {
         this.name = name;
     }
 
-    public double getPoints() {
-        return points;
+    public double getReached() {
+        return reached;
     }
 
-    public void setPoints(double points) {
-        this.points = points;
+    public void setReached(double reached) {
+        this.reached = reached;
+    }
+
+    public double getReachable() {
+        return reachable;
+    }
+
+    public void setReachable(double reachable) {
+        this.reachable = reachable;
     }
 }

@@ -4,6 +4,7 @@ import com.examanagerii.result.Exercise;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Document(collection = "exam")
@@ -12,16 +13,41 @@ public class Exam {
     @Id
     private String id;
     private String name;
-    private String groupId;
-    private List<Exercise> exercises;
+    private String description;
+    private List<Exercise> exercises = new ArrayList<>();
+    private List<Double> rating = new ArrayList<>(15);
+    private String userId;
 
     public Exam() {
     }
 
-    public Exam(String name, String groupId, List<Exercise> exercises) {
+    public Exam(String name, List<Exercise> exercises) {
         this.name = name;
-        this.groupId = groupId;
         this.exercises = exercises;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public List<Double> getRating() {
+        return rating;
+    }
+
+    public void setRating(List<Double> rating) {
+        this.rating = rating;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getId() {
@@ -38,14 +64,6 @@ public class Exam {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(String groupId) {
-        this.groupId = groupId;
     }
 
     public List<Exercise> getExercises() {

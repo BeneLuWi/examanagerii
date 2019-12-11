@@ -3,7 +3,7 @@ import Admin from "./components/admin/Admin";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Landing from "./components/landing/Landing";
 import Groups from "./components/groups/Groups";
-import Exam from "./components/exam/Exam";
+import Exams from "./components/exams/Exams";
 import Statistics from "./components/statistics/Statistics";
 
 
@@ -32,7 +32,7 @@ const App = () => {
                         <Groups/>
                     }/>
                     <Route path={"/exam"} render={() =>
-                        <Exam/>
+                        <Exams/>
                     }/>
                     <Route path={"/statistics"} render={() =>
                         <Statistics/>

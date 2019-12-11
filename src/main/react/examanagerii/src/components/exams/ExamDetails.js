@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import PropTypes from 'prop-types';
 
-const Exam = ({}) => {
+const ExamDetails = ({exam}) => {
 
     /***********
      *
@@ -22,10 +22,14 @@ const Exam = ({}) => {
      ************/
 
     return (
-        <div> New Hook </div>
+        <div>
+            <span className={"w3-xlarge"}>{exam.name}</span>&nbsp;
+            <span className={"w3-opacity w3-small"}>{exam.description}</span>
+
+        </div>
     )
 
 };
 
-Exam.propTypes = {};
-export default Exam
+ExamDetails.propTypes = {};
+export default ExamDetails
