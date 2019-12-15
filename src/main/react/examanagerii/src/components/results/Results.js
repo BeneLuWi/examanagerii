@@ -1,10 +1,13 @@
 import React, {useState, useEffect} from 'react'
-
+import cl from "classnames";
 import axios from "axios";
 import Notification from "../../assets/components/Notification";
 import Button from "../../assets/components/Button";
 import TextInput from "../../assets/components/TextInput";
 import Select from "react-select";
+import StudentResult from "./StudentResult";
+import Statistics from "../statistics/Statistics";
+import Student from "../groups/Student";
 
 const Results = ({}) => {
 
@@ -24,7 +27,7 @@ const Results = ({}) => {
     const [groupOption, setGroupOption] = useState(null);
     const [showGroupSelect, setShowGroupSelect] = useState(true);
 
-    const [showNewResults, setShowNewResults] = useState(false);
+
     const [notification, setNotification] = useState([false, "", true]);
 
     useEffect(() => {getGroups(); getExams(); getResults()}, []);
@@ -109,10 +112,21 @@ const Results = ({}) => {
             </div>
 
             <div className={"w3-row"}>
-                <ul className={"w3-ul w3-half"}>
+                <ul className={"w3-ul w3-half w3-border"}>
                     {group.map(student =>
-                        <li key={student.id}>
-                            {student.firstname} {student.lastname}
+                        <li key={student.id} className="w3-display-container">
+                            <StudentResult
+                                student={student}
+                                result={}
+
+                            />
+                        </li>
+                    )}
+                </ul>
+                <ul className={"w3-ul w3-half w3-right w3-border"}>
+                    {exam && exam.exercises.map(ex =>
+                        <li key={ex.id}>
+                            {ex.name}: {ex.reachable}
                         </li>
                     )}
                 </ul>
