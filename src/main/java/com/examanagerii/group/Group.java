@@ -9,12 +9,21 @@ public class Group {
     @Id
     private String id;
     private String name;
+    private String description;
 
     public Group() {
     }
 
     public Group(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getId() {

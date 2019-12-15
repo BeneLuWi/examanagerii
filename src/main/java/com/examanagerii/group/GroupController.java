@@ -28,7 +28,7 @@ public class GroupController {
     GroupRepository groupRepository;
 
     @GetMapping("/myGroups")
-    public List<Group> getMyGroup() {
+    public List<Group> getMyGroups() {
         ExaUser user = securityService.getCurrentAuthenticatedUser();
         return user
                 .getGroups()

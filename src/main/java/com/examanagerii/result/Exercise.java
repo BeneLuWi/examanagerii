@@ -4,6 +4,7 @@ public class Exercise {
     private String name;
     private double reached;
     private double reachable;
+    private String id;
 
     public Exercise() {
     }
@@ -12,6 +13,14 @@ public class Exercise {
         this.name = name;
         this.reached = reached;
         this.reachable = reachable;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {

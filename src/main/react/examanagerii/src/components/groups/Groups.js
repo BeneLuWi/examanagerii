@@ -16,9 +16,10 @@ const Groups = ({}) => {
 
     const [groups, setGroups] = useState([]);
     const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
     const [notification, setNotification] = useState([false, "", true]);
 
-    const [showNewGroup, setShowNewGroup] = useState(false)
+    const [showNewGroup, setShowNewGroup] = useState(false);
 
     useEffect(() => loadGroups(), []);
 
@@ -29,7 +30,7 @@ const Groups = ({}) => {
      ************/
 
     const sendGroup = () => {
-        axios.post("/api/groups/create", {name: name})
+        axios.post("/api/groups/create", {name: name, description: description})
             .then(() => {
                 setNotification([true, "Gespeichert", true]);
                 setName("");
@@ -61,6 +62,7 @@ const Groups = ({}) => {
                 <div className={"animate-left"}>
                     <h3>Neue Klasse erstellen</h3>
                     <TextInput label={"Klassenname"} onChange={setName} value={name}/>
+                    <TextInput label={"Beschreibung"} onChange={setDescription} value={description}/>
                     <Button disabled={!name.length} label={"Speichern"} onClick={sendGroup}/>
                 </div>
             }
@@ -75,7 +77,6 @@ const Groups = ({}) => {
                     )}
                 </ul>
             </div>
-
 
             {notification[0] &&
                 <Notification

@@ -15,7 +15,7 @@ public class Exam {
     private String name;
     private String description;
     private List<Exercise> exercises = new ArrayList<>();
-    private List<Double> rating = new ArrayList<>(15);
+    private List<Double> ratings = new ArrayList<>(15);
     private String userId;
 
     public Exam() {
@@ -38,12 +38,12 @@ public class Exam {
         return userId;
     }
 
-    public List<Double> getRating() {
-        return rating;
+    public List<Double> getRatings() {
+        return ratings;
     }
 
-    public void setRating(List<Double> rating) {
-        this.rating = rating;
+    public void setRatings(List<Double> rating) {
+        this.ratings = rating;
     }
 
     public void setUserId(String userId) {

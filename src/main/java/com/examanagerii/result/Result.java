@@ -1,15 +1,21 @@
 package com.examanagerii.result;
 
+import jdk.nashorn.internal.ir.annotations.Ignore;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.List;
 
+@Document(collection = "result")
 public class Result {
 
+    @Id
     private String id;
     private String studentId;
     private String examId;
 
     private String date;
-    private String groudId;
+    private String groupId;
 
     private List<Exercise> exercises;
 
@@ -48,12 +54,12 @@ public class Result {
         this.date = date;
     }
 
-    public String getGroudId() {
-        return groudId;
+    public String getGroupId() {
+        return groupId;
     }
 
-    public void setGroudId(String groudId) {
-        this.groudId = groudId;
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
     }
 
     public List<Exercise> getExercises() {

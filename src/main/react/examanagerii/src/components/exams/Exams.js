@@ -72,7 +72,7 @@ const Exams = ({}) => {
                 <ul className={"w3-ul"}>
                     {exams.map(exam =>
                         <li key={exam.id} className={"animate-left"}>
-                            <ExamDetails exam={exam}/>
+                            <ExamDetails exam={exam} update={loadExams}/>
                         </li>
                     )}
                 </ul>

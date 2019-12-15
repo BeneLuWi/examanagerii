@@ -57,7 +57,7 @@ const NewStudent = ({group, update}) => {
      ************/
 
     return (
-        <div className={"w3-padding w3-small w3-card animate-left"}>
+        <div className={"w3-padding w3-small animate-left"}>
             <TextInput className={"d-inline-block"} label={"Vorname"} onChange={setFirstname} value={firstname} width={"33%"}/>
             <TextInput className={"d-inline-block"} label={"Nachname"} onChange={setLastname} value={lastname} width={"33%"}/>
             <div style={{width: "33%", display:"inline-block"}}>
