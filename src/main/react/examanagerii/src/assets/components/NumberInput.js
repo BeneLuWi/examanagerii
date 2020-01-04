@@ -14,7 +14,12 @@ const NumberInput = ({min, max, label, value, setValue, index, width}) => {
      *
      *************/
 
-    const handleChange = (val) => {
+    const handleChange = (inVal) => {
+        let val = parseFloat(inVal);
+        if (max && val > max) val = max;
+        if (min && val < min) val = min;
+
+
         index !== null ?
             setValue(val, index) :
             setValue(val)
@@ -31,7 +36,7 @@ const NumberInput = ({min, max, label, value, setValue, index, width}) => {
         <label style={{width: width || 30}}>
             <span className={"w3-opacity"}>{label || ""}</span>
             <input
-                type={"number"}
+                type="number"
                 min={min || 0}
                 max={max || 100}
                 step={0.5}

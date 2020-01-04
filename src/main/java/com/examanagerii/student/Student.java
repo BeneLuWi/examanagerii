@@ -15,7 +15,6 @@ public class Student {
     private String firstname;
     private String lastname;
     private String groupId;
-    private List<Result> results = new ArrayList<>();
     private String gender = "MALE";
 
     public Student() {
@@ -61,11 +60,4 @@ public class Student {
         this.groupId = groupId;
     }
 
-    public List<Result> getResults() {
-        return results;
-    }
-
-    public void setResults(List<Result> results) {
-        this.results = results;
-    }
 }

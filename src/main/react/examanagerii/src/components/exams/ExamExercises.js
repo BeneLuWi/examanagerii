@@ -3,6 +3,16 @@ import TextInput from "../../assets/components/TextInput";
 import Button from "../../assets/components/Button";
 import NumberInput from "../../assets/components/NumberInput";
 
+/**
+ * @return {string}
+ */
+const ID = function () {
+    // Math.random should be unique because of its seeding algorithm.
+    // Convert it to base 36 (numbers + letters), and grab the first 9 characters
+    // after the decimal.
+    return '_' + Math.random().toString(36).substr(2, 9);
+};
+
 const ExamExercises = ({exes, setExes, examId}) => {
 
     /*************
@@ -24,7 +34,7 @@ const ExamExercises = ({exes, setExes, examId}) => {
     };
 
     const addExe = () => {
-        setExes([...exes, {name: `Aufgabe ${exes.length + 1}`, id: `${examId}-${exes.length}`, reachable: 0}])
+        setExes([...exes, {name: `Aufgabe ${exes.length + 1}`, id: ID(), reachable: 0}])
     };
 
     const removeExe = (index) => {

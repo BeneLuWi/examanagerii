@@ -1,9 +1,9 @@
 package com.examanagerii.result;
 
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Document(collection = "result")
@@ -20,6 +20,7 @@ public class Result {
     private List<Exercise> exercises;
 
     public Result() {
+        this.exercises = new ArrayList<>();
     }
 
     public String getId() {
