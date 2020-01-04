@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Document(collection = "result")
 public class Result {
@@ -22,6 +23,21 @@ public class Result {
     public Result() {
         this.exercises = new ArrayList<>();
     }
+
+    public Grade getGrade(List<Double> ratings) {
+        double sumReached = exercises
+                .stream()
+                .map(Exercise::getReached)
+                .reduce(0.0, Double::sum);
+        double sumReachable = exercises
+                .stream()
+                .map(Exercise::getReachable)
+                .reduce(0.0, Double::sum);
+
+        double percentageReached = sumReached / sumReachable;
+
+        return new Grade((int) Math.round(percentageReached * 15.0));
+    };
 
     public String getId() {
         return id;
