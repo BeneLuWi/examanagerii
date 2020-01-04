@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import PropTypes from 'prop-types';
 import cl from "classnames";
 
-const Button = ({label, onClick, disabled, className}) => {
+const Button = ({label, onClick, disabled, className, margin}) => {
 
     /***********
      *
@@ -24,7 +24,7 @@ const Button = ({label, onClick, disabled, className}) => {
 
     return (
         <button
-            className={cl("w3-btn w3-blue w3-margin", className)}
+            className={cl("w3-btn w3-blue", {"w3-margin": !margin}, className)}
             onClick={onClick}
             disabled={disabled}>
             {label}

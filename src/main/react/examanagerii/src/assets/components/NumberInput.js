@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 
-const NumberInput = ({min, max, label, value, setValue, index}) => {
+const NumberInput = ({min, max, label, value, setValue, index, width}) => {
 
     /*************
      *
@@ -15,7 +15,6 @@ const NumberInput = ({min, max, label, value, setValue, index}) => {
      *************/
 
     const handleChange = (val) => {
-        console.log(index)
         index !== null ?
             setValue(val, index) :
             setValue(val)
@@ -29,7 +28,7 @@ const NumberInput = ({min, max, label, value, setValue, index}) => {
 
 
     return (
-        <label style={{width: 30}}>
+        <label style={{width: width || 30}}>
             <span className={"w3-opacity"}>{label || ""}</span>
             <input
                 type={"number"}

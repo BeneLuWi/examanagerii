@@ -30,11 +30,11 @@ const ExamRatings = ({ratings, setRatings}) => {
 
     return (
         <div className={"w3-half"}>
-            <span className={"w3-xlarge"}>Notenverteilung</span>
+            <span className={"w3-large"}>Notenverteilung</span>
             {ratings.map((r, index) =>
                 <div className={"animate-left"}>
                     <NumberInput
-                        label={`% bis ${index} MSS-Punkte`}
+                        label={`min. % für ${index} MSS-Punkte`}
                         value={r}
                         index={index}
                         setValue={handleChange}

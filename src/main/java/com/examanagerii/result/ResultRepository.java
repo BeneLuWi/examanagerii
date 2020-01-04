@@ -12,7 +12,7 @@ public interface ResultRepository extends MongoRepository<Result, String> {
 
     List<Result> findResultsByGroupIdAndExamId(String groupId, String examId);
 
-    @Query(" { $and: [ {'groupId': {$in : [?0]}}, {'examId': {$in : [?0]}} ]}")
+    @Query(" { $and: [ {'groupId': {$elemMatch: {$in : [?0]} }}, {'examId': {$elemMatch: {$in : [?1]}} ]}")
     List<Result> findMyResults(List<String> groupIds, List<String> examIds);
 
 }

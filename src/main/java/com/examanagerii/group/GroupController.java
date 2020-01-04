@@ -6,9 +6,7 @@ import com.examanagerii.user.ExaUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
@@ -30,11 +28,13 @@ public class GroupController {
     @GetMapping("/myGroups")
     public List<Group> getMyGroups() {
         ExaUser user = securityService.getCurrentAuthenticatedUser();
-        return user
-                .getGroups()
-                .stream()
-                .map(g -> groupRepository.findById(g).orElseThrow(() -> new NoSuchElementException(g)))
-                .collect(Collectors.toList());
+        return  user.getGroups().size() > 0 ?
+                   user
+                    .getGroups()
+                    .stream()
+                    .map(g -> groupRepository.findById(g).orElseThrow(() -> new NoSuchElementException(g)))
+                    .collect(Collectors.toList()) :
+                 Collections.emptyList();
     }
 
     @PostMapping("/create")
