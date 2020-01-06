@@ -23,16 +23,12 @@ public class Statistics {
 
     private Exam exam;
     private Group group;
-    private List<Result> results;
     private List<ExerciseStatistics> exerciseStatistics;
-    private List<Student> students;
     private List<StudentResult> studentResults;
 
     public Statistics(Exam exam, List<Result> results, List<Student> students) {
         this.exam = exam;
         results.forEach(result -> result.calcGrade(exam.getRatings()));
-        this.results = results;
-        this.students = students;
         this.studentResults = results
                 .stream()
                 .map(result ->
@@ -51,17 +47,17 @@ public class Statistics {
     }
 
     private void calcStudents() {
-        this.studentsMale = (int) students
+        this.studentsMale = (int) studentResults
                 .stream()
-                .filter(s -> s.getGender().equals("MALE"))
+                .filter(s -> s.getStudent().getGender().equals("MALE"))
                 .count();
 
-        this.studentsFemale = (int) students
+        this.studentsFemale = (int) studentResults
                 .stream()
-                .filter(s -> s.getGender().equals("FEMALE"))
+                .filter(s -> s.getStudent().getGender().equals("FEMALE"))
                 .count();
 
-        this.studentsTotal = students.size();
+        this.studentsTotal = studentResults.size();
     }
 
     private void calcAverage() {
@@ -104,15 +100,6 @@ public class Statistics {
     public void setSelectivity(double selectivity) {
         this.selectivity = selectivity;
     }
-
-    public List<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(List<Student> students) {
-        this.students = students;
-    }
-
     public List<StudentResult> getStudentResults() {
         return studentResults;
     }
@@ -185,13 +172,6 @@ public class Statistics {
         this.group = group;
     }
 
-    public List<Result> getResults() {
-        return results;
-    }
-
-    public void setResults(List<Result> results) {
-        this.results = results;
-    }
 
     public List<ExerciseStatistics> getExerciseStatistics() {
         return exerciseStatistics;
