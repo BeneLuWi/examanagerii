@@ -35,12 +35,8 @@ public class ResultController {
         List<Exam> myExams = examController.getMyExams();
         List<Group> myGroups = groupController.getMyGroups();
 
-        List<Result> myResults = resultRepository.findMyResults(
-                myExams.stream().map(Exam::getId).collect(Collectors.toList()),
-                myGroups.stream().map(Group::getId).collect(Collectors.toList())
-        );
 
-        return myResults;
+        return null;
     }
 
     @GetMapping("/forStudent/{studId}/{examId}/{groupId}")
@@ -54,7 +50,6 @@ public class ResultController {
         } else {
             Exam exam = examRepository.findById(examId)
                     .orElseThrow(() -> new NoSuchElementException(examId));
-
             Result result = new Result();
             result.setExercises(exam.getExercises());
             result.setExamId(examId);
@@ -67,6 +62,8 @@ public class ResultController {
 
     @PutMapping("save")
     public void saveResult(@RequestBody Result result) {
+
+        result.setExercises(result.getExercises());
         resultRepository.save(result);
     }
 

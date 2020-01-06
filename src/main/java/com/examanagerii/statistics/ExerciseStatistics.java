@@ -15,10 +15,6 @@ public class ExerciseStatistics {
     public ExerciseStatistics() {
     }
 
-
-
-
-
     public double getDifficulty() {
         return difficulty;
     }

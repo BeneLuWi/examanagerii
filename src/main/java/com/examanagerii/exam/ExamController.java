@@ -1,5 +1,7 @@
 package com.examanagerii.exam;
 
+import com.examanagerii.result.Result;
+import com.examanagerii.result.ResultRepository;
 import com.examanagerii.security.SecurityService;
 import com.examanagerii.user.ExaUser;
 import com.examanagerii.user.ExaUserRepository;
@@ -22,6 +24,9 @@ public class ExamController {
 
     @Autowired
     ExaUserRepository userRepository;
+
+    @Autowired
+    ResultRepository resultRepository;
 
     @GetMapping("myExams")
     public List<Exam> getMyExams() {
@@ -55,6 +60,12 @@ public class ExamController {
 
     @PutMapping("update")
     public void updateExam(@RequestBody Exam exam) {
+
+        List<Result> results = resultRepository.findAllByExamId(exam.getId());
+
+        results.forEach(result -> result.updateExercises(exam.getExercises()));
+
+        resultRepository.saveAll(results);
         repository.save(exam);
     }
 

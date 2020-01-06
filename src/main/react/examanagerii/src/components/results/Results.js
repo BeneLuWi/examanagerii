@@ -1,14 +1,8 @@
 import React, {useState, useEffect} from 'react'
-import cl from "classnames";
 import axios from "axios";
 import Notification from "../../assets/components/Notification";
-import Button from "../../assets/components/Button";
-import TextInput from "../../assets/components/TextInput";
 import Select from "react-select";
 import StudentResult from "./StudentResult";
-import Statistics from "../statistics/Statistics";
-import Student from "../groups/Student";
-import NumberInput from "../../assets/components/NumberInput";
 
 const Results = ({}) => {
 

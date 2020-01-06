@@ -42,7 +42,7 @@ const ExamDetails = ({exam, update}) => {
             <div className={"w3-row"}>
                 <h4 className={cl("w3-button")} onClick={toggleAll}>
                     <span className={"w3-xlarge"}>{exam.name}</span>&nbsp;
-                    <span className={"w3-opacity w3-small"}>{exam.description}</span>
+                    <span className={"w3-opacity w3-small"}>{exam.description}</span>&nbsp;
                     {expandDetails || expandEdit ? <span className={"w3-tiny"}>&#9650;</span> : <span className={"w3-tiny"}>&#9660;</span>}
                 </h4>
                 {<Button label={"Bearbeiten"} onClick={() => {setExpandEdit(!expandEdit); setExpandDetails(false)}}/>}

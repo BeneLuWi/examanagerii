@@ -3,15 +3,20 @@ package com.examanagerii.statistics;
 import com.examanagerii.exam.Exam;
 import com.examanagerii.group.Group;
 import com.examanagerii.result.Result;
+import com.examanagerii.student.Student;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Statistics {
 
     private double avgTotal;
     private double avgMale;
     private double avgFemale;
+    private double difficulty;
+    private double deviation;
+    private double selectivity;
     private int studentsTotal;
     private int studentsMale;
     private int studentsFemale;
@@ -20,33 +25,101 @@ public class Statistics {
     private Group group;
     private List<Result> results;
     private List<ExerciseStatistics> exerciseStatistics;
+    private List<Student> students;
+    private List<StudentResult> studentResults;
 
-
-    public Statistics(Exam exam, Group group, List<Result> results) {
+    public Statistics(Exam exam, List<Result> results, List<Student> students) {
         this.exam = exam;
-        this.group = group;
+        results.forEach(result -> result.calcGrade(exam.getRatings()));
         this.results = results;
+        this.students = students;
+        this.studentResults = results
+                .stream()
+                .map(result ->
+                        new StudentResult(
+                                students.stream()
+                                        .filter(student -> student.getId().equals(result.getStudentId()))
+                                        .findAny()
+                                        .orElse(null),
+                                result)
+                ).collect(Collectors.toList());
+
         this.exerciseStatistics = new ArrayList<>();
+
+        calcStudents();
+
+    }
+
+    private void calcStudents() {
+        this.studentsMale = (int) students
+                .stream()
+                .filter(s -> s.getGender().equals("MALE"))
+                .count();
+
+        this.studentsFemale = (int) students
+                .stream()
+                .filter(s -> s.getGender().equals("FEMALE"))
+                .count();
+
+        this.studentsTotal = students.size();
+    }
+
+    private void calcAverage() {
+
+    }
+
+    private void calcSelectivity() {
+
+    }
+
+    private void calcDeviation() {
+
+    }
+
+    private void calcDifficulty() {
+
     }
 
 
+    public double getDifficulty() {
+        return difficulty;
+    }
 
+    public void setDifficulty(double difficulty) {
+        this.difficulty = difficulty;
+    }
 
+    public double getDeviation() {
+        return deviation;
+    }
 
+    public void setDeviation(double deviation) {
+        this.deviation = deviation;
+    }
 
+    public double getSelectivity() {
+        return selectivity;
+    }
 
+    public void setSelectivity(double selectivity) {
+        this.selectivity = selectivity;
+    }
 
+    public List<Student> getStudents() {
+        return students;
+    }
 
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
 
+    public List<StudentResult> getStudentResults() {
+        return studentResults;
+    }
 
-
-    /**
-     *
-     *
-     *
-     *
-     *
-     */
+    public void setStudentResults(List<StudentResult> studentResults) {
+        this.studentResults = studentResults;
+    }
 
     public double getAvgTotal() {
         return avgTotal;

@@ -15,8 +15,7 @@ public interface ResultRepository extends MongoRepository<Result, String> {
 
     Optional<Result> findResultByStudentIdAndExamId(String studentId, String examId);
 
-    //@Query(" { '$and': [ {'groupId':  {'$in' : [?0]} }, {'examId': {'$in' : [?1]} ]}")
-    @Query(" {'groupId':  {'$in' : [?0]}}")
-    List<Result> findMyResults(List<String> groupIds, List<String> examIds);
+    List<Result> findAllByExamId(String examId);
+
 
 }

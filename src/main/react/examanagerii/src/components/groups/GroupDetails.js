@@ -29,8 +29,8 @@ const GroupDetails = ({group}) => {
     return (
         <div>
             <h4 className={cl("w3-button", {"w3-blue": expandStudents})} onClick={() => setExpandStudents(!expandStudents)}>
-                {group.name}
-                <span className={"w3-small w3-opacity"}>{group.description}</span>
+                {group.name}&nbsp;
+                <span className={"w3-small w3-opacity"}>{group.description}</span>&nbsp;
                 {expandStudents ? <span className={"w3-tiny"}>&#9650;</span> : <span className={"w3-tiny"}>&#9660;</span>}
             </h4>
             {expandStudents &&
