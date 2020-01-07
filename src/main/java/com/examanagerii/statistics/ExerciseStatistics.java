@@ -16,9 +16,11 @@ public class ExerciseStatistics {
     private double difficulty;
     private double correlation;
     private double deviation;
+
     private double maxReachedTotal;
     private double maxReachedMale;
     private double maxReachedFemale;
+
     private double avgTotal;
     private double avgMale;
     private double avgFemale;
@@ -63,7 +65,7 @@ public class ExerciseStatistics {
         this.maxReachedMale = maleReached.stream().max(Double::compare).orElse(0.0);
 
         StandardDeviation sd = new StandardDeviation();
-        this.deviation = sd.evaluate(totalReached.stream().mapToDouble(Double::doubleValue).toArray());
+        this.deviation = Statistics.round(sd.evaluate(totalReached.stream().mapToDouble(Double::doubleValue).toArray()), true);
 
         double[] x = totalReached.stream().mapToDouble(Double::doubleValue).toArray();
         double[] y = studentResults
@@ -72,7 +74,11 @@ public class ExerciseStatistics {
                 .mapToDouble(Double::doubleValue)
                 .toArray();
 
-        this.correlation = new PearsonsCorrelation().correlation(x, y);
+        for (int i = 0; i < y.length; i++) {
+            y[i] -= x[i];
+        }
+
+        this.correlation = Statistics.round(new PearsonsCorrelation().correlation(x, y), true);
 
     }
 
@@ -111,6 +117,14 @@ public class ExerciseStatistics {
                 .collect(Collectors.toList());
     }
 
+    public double getCorrelation() {
+        return correlation;
+    }
+
+    public void setCorrelation(double correlation) {
+        this.correlation = correlation;
+    }
+
     public double getDeviation() {
         return deviation;
     }
@@ -127,13 +141,6 @@ public class ExerciseStatistics {
         this.difficulty = difficulty;
     }
 
-    public double getcorrelation() {
-        return correlation;
-    }
-
-    public void setcorrelation(double correlation) {
-        this.correlation = correlation;
-    }
 
     public double getMaxReachedTotal() {
         return maxReachedTotal;

@@ -25,7 +25,7 @@ const Accordion = ({child, title}) => {
      ************/
 
     return (
-        <div className={"accordion-wrapper"}>
+        <div className={"accordion-wrapper w3-margin-top"}>
             <h2 onClick={() => setExpand(!expand)}>{title}</h2>
             <div className={cl("accordion", {"accordion-expand": expand})}>
                 {child}

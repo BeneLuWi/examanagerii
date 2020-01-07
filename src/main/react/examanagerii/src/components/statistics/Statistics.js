@@ -4,6 +4,7 @@ import Notification from "../../assets/components/Notification";
 import axios from "axios";
 import Accordion from "../../assets/components/Accordion";
 import ResultTable from "./ResultTable";
+import StatisticsTable from "./StatisticsTable";
 
 const Statistics = ({}) => {
 
@@ -104,16 +105,24 @@ const Statistics = ({}) => {
 
             {statistics &&
                 <div className={"w3-animate-opacity"}>
-                    <div className={"w3-margin-top"}>
-                        <Accordion
-                            title={"Ergebnisse"}
-                            child={
-                                <ResultTable
-                                    statistics={statistics}
-                                />
-                            }
-                        />
-                    </div>
+
+                    <Accordion
+                        title={"Statistiken in Zahlen"}
+                        child={
+                            <StatisticsTable
+                                statistics={statistics}
+                            />
+                        }
+                    />
+                    <Accordion
+                        title={"Ergebnisse"}
+                        child={
+                            <ResultTable
+                                statistics={statistics}
+                            />
+                        }
+                    />
+
                 </div>
             }
 

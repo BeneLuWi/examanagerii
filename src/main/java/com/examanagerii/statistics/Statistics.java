@@ -20,7 +20,6 @@ public class Statistics {
     private double avgGradeFemale;
     private double difficulty;
     private double deviation;
-    private double correlation;
     private int studentsTotal;
     private int studentsMale;
     private int studentsFemale;
@@ -66,13 +65,13 @@ public class Statistics {
 
 
         StandardDeviation sd = new StandardDeviation();
-        this.deviation = sd.evaluate(
+        this.deviation = round(sd.evaluate(
                 studentResults
                         .stream()
                         .map(studentResult -> studentResult.getResult().getTotalReached())
                         .mapToDouble(Double::doubleValue)
                         .toArray()
-        );
+        ),true);
 
         calcStudents();
         calcAverageGrade();
@@ -157,7 +156,6 @@ public class Statistics {
 
     }
 
-
     public double getAvgGradeTotal() {
         return avgGradeTotal;
     }
@@ -198,13 +196,6 @@ public class Statistics {
         this.deviation = deviation;
     }
 
-    public double getcorrelation() {
-        return correlation;
-    }
-
-    public void setcorrelation(double correlation) {
-        this.correlation = correlation;
-    }
     public List<StudentResult> getStudentResults() {
         return studentResults;
     }
