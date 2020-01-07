@@ -34,21 +34,21 @@ const StatisticsTable = ({statistics}) => {
             </tr>
             <tr>
                 <td>Höchste Punktzahl</td>
-                <td>TODO</td>
+                <td>{statistics.maxReachedTotal}</td>
                 {statistics.exerciseStatistics.map(ex =>
                     <td>{ex.maxReachedTotal}</td>
                 )}
             </tr>
             <tr>
                 <td>Höchste Punktzahl w</td>
-                <td>TODO</td>
+                <td>{statistics.maxReachedFemale}</td>
                 {statistics.exerciseStatistics.map(ex =>
                     <td>{ex.maxReachedFemale}</td>
                 )}
             </tr>
             <tr>
                 <td>Höchste Punktzahl m</td>
-                <td>TODO</td>
+                <td>{statistics.maxReachedMale}</td>
                 {statistics.exerciseStatistics.map(ex =>
                     <td>{ex.maxReachedMale}</td>
                 )}

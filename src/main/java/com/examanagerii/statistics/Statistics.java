@@ -9,6 +9,7 @@ import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 public class Statistics {
@@ -16,11 +17,18 @@ public class Statistics {
     private double avgTotal;
     private double avgMale;
     private double avgFemale;
+
+    private double maxReachedTotal;
+    private double maxReachedMale;
+    private double maxReachedFemale;
+
     private double avgGradeTotal;
     private double avgGradeMale;
     private double avgGradeFemale;
+
     private double difficulty;
     private double deviation;
+
     private int studentsTotal;
     private int studentsMale;
     private int studentsFemale;
@@ -73,6 +81,23 @@ public class Statistics {
                         .mapToDouble(Double::doubleValue)
                         .toArray()
         ),true);
+
+
+
+        this.maxReachedTotal = this.studentResults
+                .stream()
+                .map(studentResult -> studentResult.getResult().getTotalReached())
+                .max(Double::compare).orElse(0.0);
+
+        this.maxReachedFemale = this.femaleStudentsList
+                .stream()
+                .map(studentResult -> studentResult.getResult().getTotalReached())
+                .max(Double::compare).orElse(0.0);
+
+        this.maxReachedMale = this.maleStudentsList
+                .stream()
+                .map(studentResult -> studentResult.getResult().getTotalReached())
+                .max(Double::compare).orElse(0.0);
 
         calcStudents();
         calcAverageGrade();
@@ -222,6 +247,30 @@ public class Statistics {
 
     public void setAvgFemale(double avgFemale) {
         this.avgFemale = avgFemale;
+    }
+
+    public double getMaxReachedTotal() {
+        return maxReachedTotal;
+    }
+
+    public void setMaxReachedTotal(double maxReachedTotal) {
+        this.maxReachedTotal = maxReachedTotal;
+    }
+
+    public double getMaxReachedMale() {
+        return maxReachedMale;
+    }
+
+    public void setMaxReachedMale(double maxReachedMale) {
+        this.maxReachedMale = maxReachedMale;
+    }
+
+    public double getMaxReachedFemale() {
+        return maxReachedFemale;
+    }
+
+    public void setMaxReachedFemale(double maxReachedFemale) {
+        this.maxReachedFemale = maxReachedFemale;
     }
 
     public int getStudentsTotal() {
