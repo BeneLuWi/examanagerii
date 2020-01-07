@@ -107,7 +107,7 @@ const Statistics = ({}) => {
                 <div className={"w3-animate-opacity"}>
 
                     <Accordion
-                        title={"Statistiken in Zahlen"}
+                        title={"in Zahlen"}
                         child={
                             <StatisticsTable
                                 statistics={statistics}

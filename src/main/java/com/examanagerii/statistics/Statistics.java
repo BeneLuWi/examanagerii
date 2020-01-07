@@ -2,6 +2,7 @@ package com.examanagerii.statistics;
 
 import com.examanagerii.exam.Exam;
 import com.examanagerii.group.Group;
+import com.examanagerii.result.Exercise;
 import com.examanagerii.result.Result;
 import com.examanagerii.student.Student;
 import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
@@ -121,6 +122,13 @@ public class Statistics {
         this.avgFemale = round(femaleTotal / (double) studentsFemale, false);
         this.avgMale =  round(maleTotal / (double) studentsMale, false);
 
+        double totalReachable = this.exam.getExercises()
+                .stream()
+                .map(Exercise::getReachable)
+                .reduce(0.0, Double::sum);
+
+        this.difficulty = Statistics.round((total / (studentResults.size() * totalReachable)) * 100, false);
+
     }
 
     private void calcAverageGrade() {
@@ -142,18 +150,6 @@ public class Statistics {
         this.avgGradeTotal = round(total / (double) studentsTotal, false) ;
         this.avgGradeFemale = round(femaleTotal / (double) studentsFemale, false);
         this.avgGradeMale = round(maleTotal / (double) studentsMale, false);
-    }
-
-    private void calccorrelation() {
-
-    }
-
-    private void calcDeviation() {
-
-    }
-
-    private void calcDifficulty() {
-
     }
 
     public double getAvgGradeTotal() {

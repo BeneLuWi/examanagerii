@@ -88,6 +88,13 @@ const StatisticsTable = ({statistics}) => {
                     <td>{ex.correlation}</td>
                 )}
             </tr>
+            <tr>
+                <td>Schwierigkeit</td>
+                <td>{statistics.difficulty}</td>
+                {statistics.exerciseStatistics.map(ex =>
+                    <td>{ex.difficulty}</td>
+                )}
+            </tr>
 
         </table>
     )

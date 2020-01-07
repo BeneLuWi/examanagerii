@@ -80,6 +80,9 @@ public class ExerciseStatistics {
 
         this.correlation = Statistics.round(new PearsonsCorrelation().correlation(x, y), true);
 
+
+        this.difficulty = Statistics.round((total / (studentResults.size() * reachable)) * 100, false);
+
     }
 
 
