@@ -4,6 +4,7 @@ import com.examanagerii.exam.Exam;
 import com.examanagerii.group.Group;
 import com.examanagerii.result.Result;
 import com.examanagerii.student.Student;
+import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +15,12 @@ public class Statistics {
     private double avgTotal;
     private double avgMale;
     private double avgFemale;
+    private double avgGradeTotal;
+    private double avgGradeMale;
+    private double avgGradeFemale;
     private double difficulty;
     private double deviation;
-    private double selectivity;
+    private double correlation;
     private int studentsTotal;
     private int studentsMale;
     private int studentsFemale;
@@ -25,6 +29,10 @@ public class Statistics {
     private Group group;
     private List<ExerciseStatistics> exerciseStatistics;
     private List<StudentResult> studentResults;
+
+    private List<StudentResult> maleStudentsList;
+    private List<StudentResult> femaleStudentsList;
+
 
     public Statistics(Exam exam, List<Result> results, List<Student> students) {
         this.exam = exam;
@@ -37,12 +45,38 @@ public class Statistics {
                                         .filter(student -> student.getId().equals(result.getStudentId()))
                                         .findAny()
                                         .orElse(null),
-                                result)
-                ).collect(Collectors.toList());
+                                result))
+                .collect(Collectors.toList());
 
-        this.exerciseStatistics = new ArrayList<>();
+
+        this.maleStudentsList = this.studentResults
+                .stream()
+                .filter(studentResult -> studentResult.getStudent().getGender().equals("MALE"))
+                .collect(Collectors.toList());
+        this.femaleStudentsList = this.studentResults
+                .stream()
+                .filter(studentResult -> studentResult.getStudent().getGender().equals("FEMALE"))
+                .collect(Collectors.toList());
+
+
+        this.exerciseStatistics = this.exam.getExercises()
+                .stream()
+                .map(exercise -> new ExerciseStatistics(exercise, studentResults, femaleStudentsList, maleStudentsList))
+                .collect(Collectors.toList());
+
+
+        StandardDeviation sd = new StandardDeviation();
+        this.deviation = sd.evaluate(
+                studentResults
+                        .stream()
+                        .map(studentResult -> studentResult.getResult().getTotalReached())
+                        .mapToDouble(Double::doubleValue)
+                        .toArray()
+        );
 
         calcStudents();
+        calcAverageGrade();
+        calcAveragePoints();
 
     }
 
@@ -60,11 +94,58 @@ public class Statistics {
         this.studentsTotal = studentResults.size();
     }
 
-    private void calcAverage() {
+    public static double round(double n, boolean twoDecimals) {
+        if (!twoDecimals) {
+            return Math.round(n);
+        } else {
+            return Math.round(n * 100.0) / 100.0;
+        }
+    }
+
+    private void calcAveragePoints() {
+         double total = this.studentResults
+                 .stream()
+                 .map(studentResult -> studentResult.getResult().getTotalReached())
+                 .reduce(0.0, Double::sum);
+
+        double femaleTotal = this.femaleStudentsList
+                .stream()
+                .map(studentResult -> studentResult.getResult().getTotalReached())
+                .reduce(0.0, Double::sum);
+
+        double maleTotal = this.maleStudentsList
+                .stream()
+                .map(studentResult -> studentResult.getResult().getTotalReached())
+                .reduce(0.0, Double::sum);
+
+        this.avgTotal = round(total / (double) studentsTotal, false);
+        this.avgFemale = round(femaleTotal / (double) studentsFemale, false);
+        this.avgMale =  round(maleTotal / (double) studentsMale, false);
 
     }
 
-    private void calcSelectivity() {
+    private void calcAverageGrade() {
+        double total = this.studentResults
+                .stream()
+                .map(studentResult -> studentResult.getResult().getGrade().getAsMss())
+                .reduce(0, Integer::sum);
+
+        double femaleTotal = this.femaleStudentsList
+                .stream()
+                .map(studentResult -> studentResult.getResult().getGrade().getAsMss())
+                .reduce(0, Integer::sum);
+
+        double maleTotal = this.maleStudentsList
+                .stream()
+                .map(studentResult -> studentResult.getResult().getGrade().getAsMss())
+                .reduce(0, Integer::sum);
+
+        this.avgGradeTotal = round(total / (double) studentsTotal, false) ;
+        this.avgGradeFemale = round(femaleTotal / (double) studentsFemale, false);
+        this.avgGradeMale = round(maleTotal / (double) studentsMale, false);
+    }
+
+    private void calccorrelation() {
 
     }
 
@@ -76,6 +157,30 @@ public class Statistics {
 
     }
 
+
+    public double getAvgGradeTotal() {
+        return avgGradeTotal;
+    }
+
+    public void setAvgGradeTotal(double avgGradeTotal) {
+        this.avgGradeTotal = avgGradeTotal;
+    }
+
+    public double getAvgGradeMale() {
+        return avgGradeMale;
+    }
+
+    public void setAvgGradeMale(double avgGradeMale) {
+        this.avgGradeMale = avgGradeMale;
+    }
+
+    public double getAvgGradeFemale() {
+        return avgGradeFemale;
+    }
+
+    public void setAvgGradeFemale(double avgGradeFemale) {
+        this.avgGradeFemale = avgGradeFemale;
+    }
 
     public double getDifficulty() {
         return difficulty;
@@ -93,12 +198,12 @@ public class Statistics {
         this.deviation = deviation;
     }
 
-    public double getSelectivity() {
-        return selectivity;
+    public double getcorrelation() {
+        return correlation;
     }
 
-    public void setSelectivity(double selectivity) {
-        this.selectivity = selectivity;
+    public void setcorrelation(double correlation) {
+        this.correlation = correlation;
     }
     public List<StudentResult> getStudentResults() {
         return studentResults;

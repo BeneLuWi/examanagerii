@@ -1,4 +1,14 @@
 .accordion-wrapper {
   width: 100%;
+}
 
+.accordion {
+  transition: .3s ease-in-out;
+  max-height: 0;
+  overflow: hidden;
+}
+
+.accordion-expand {
+  max-height: 500px;
+  overflow: auto;
 }

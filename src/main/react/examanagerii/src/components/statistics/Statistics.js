@@ -102,15 +102,20 @@ const Statistics = ({}) => {
                 </div>
             </div>
 
-            <div className={"w3-margin-top"}>
-                <Accordion
-                    child={
-                        <ResultTable
-                            statistics={statistics}
+            {statistics &&
+                <div className={"w3-animate-opacity"}>
+                    <div className={"w3-margin-top"}>
+                        <Accordion
+                            title={"Ergebnisse"}
+                            child={
+                                <ResultTable
+                                    statistics={statistics}
+                                />
+                            }
                         />
-                    }
-                />
-            </div>
+                    </div>
+                </div>
+            }
 
             {notification[0] &&
             <Notification

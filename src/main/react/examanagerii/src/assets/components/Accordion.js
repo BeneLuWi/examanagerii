@@ -1,13 +1,16 @@
 import React, {useState} from 'react'
 import PropTypes from 'prop-types';
+import cl from "classnames";
 
-const Accordion = ({child}) => {
+const Accordion = ({child, title}) => {
 
     /***********
      *
      * Hook States
      *
      ************/
+
+    const [expand, setExpand] = useState(true);
 
     /***********
      *
@@ -23,7 +26,10 @@ const Accordion = ({child}) => {
 
     return (
         <div className={"accordion-wrapper"}>
-            {child}
+            <h2 onClick={() => setExpand(!expand)}>{title}</h2>
+            <div className={cl("accordion", {"accordion-expand": expand})}>
+                {child}
+            </div>
         </div>
     )
 

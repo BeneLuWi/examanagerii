@@ -36,6 +36,7 @@ const NumberInput = ({min, max, label, value, setValue, index, width}) => {
         <label style={{width: width || 30}}>
             <span className={"w3-opacity"}>{label || ""}</span>
             <input
+                onClick={(e) => e.target.select()}
                 type="number"
                 min={min || 0}
                 max={max || 100}

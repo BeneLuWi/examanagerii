@@ -26,8 +26,8 @@ const ResultTable = ({statistics}) => {
     return (
         <table className={"w3-table-all"}>
             <tr>
-                <th>Nachname</th>
                 <th>Vorname</th>
+                <th>Nachname</th>
                 <th>Note</th>
                 <th>Gesamt</th>
                 {statistics.exam.exercises.map(ex =>

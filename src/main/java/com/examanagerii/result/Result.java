@@ -44,7 +44,7 @@ public class Result {
 
         this.exercises
                 .removeIf(exercise ->
-                            exercises
+                        exercises
                                 .stream()
                                 .noneMatch(exOld -> exOld.getId().equals(exercise.getId())));
 

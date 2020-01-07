@@ -1,7 +1,10 @@
 package com.examanagerii.statistics;
 
+import com.examanagerii.result.Exercise;
 import com.examanagerii.result.Result;
 import com.examanagerii.student.Student;
+
+import java.util.Optional;
 
 public class StudentResult {
 
@@ -28,4 +31,12 @@ public class StudentResult {
     public void setResult(Result result) {
         this.result = result;
     }
+
+    public Optional<Exercise> findExerciseById(String id) {
+        return this.result.getExercises()
+                .stream()
+                .filter(exercise -> exercise.getId().equals(id))
+                .findAny();
+    }
+
 }
