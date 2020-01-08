@@ -27,10 +27,20 @@ const Landing = ({}) => {
             <h1>Willkommen im Examanager</h1>
             <h4>
                 Mit Hilfe des Examanagers können Statistiken zu Klausurergebnissen Ihrer Klassen erhoben und dargestellt werden.
-                Bei der Version die Sie aktuell verwenden handelt es sich um eine Test-Version die für diese Veranstaltung programmiert
-                wurde. Bei Anmerkungen, Fragen und Kritik zum Progamm, können Sie eine gerne Mail an&nbsp;
-                <a href={"mailto:b.lueken.winkels@gmail.com"}>b.lueken.winkels@gmail.com</a>.  Bei inhaltlichen Fragen wenden Sie sich bitte an Ihren Dozenten.
             </h4>
+
+            <Accordion
+                title={"Infos"}
+                expanded={false}
+                child={
+                    <p>
+                        Bei der Version die Sie aktuell verwenden handelt es sich um eine Test-Version die für diese Veranstaltung programmiert
+                        wurde. Bei Anmerkungen, Fragen und Kritik zum Progamm, können Sie eine gerne Mail an&nbsp;
+                        <a href={"mailto:b.lueken.winkels@gmail.com"}>b.lueken.winkels@gmail.com</a>.  Bei inhaltlichen Fragen wenden Sie sich bitte an Ihren Dozenten. Der
+                        Programmcode ist offen verfügbar und kann auf <a target="_blank" href={"https://github.com/BeneLuWi/examanagerii"}>Github</a> eingesehen werden.
+                    </p>
+                }
+            />
 
             <Accordion
                 title={"Schnellstart"}

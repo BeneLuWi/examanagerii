@@ -106,6 +106,12 @@ const Statistics = ({}) => {
             </div>
 
             {statistics &&
+            <a target={"_blank"} href={`/api/statistics/downloadCsv/${exam.id}/${group.id}`} className={"w3-blue w3-btn"}>
+                Herunterladen
+            </a>
+            }
+
+            {statistics &&
                 <div className={"w3-animate-opacity w3-padding-bottom"}>
 
                     <Accordion
