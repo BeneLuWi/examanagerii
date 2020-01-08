@@ -9,9 +9,7 @@ import Select from "react-select";
 const options = [
 
     {value: "MALE", label: "Männlich"},
-    {value: "FEMALE", label: "Weiblich"},
-    {value: "DIVERSE", label: "Divers"},
-
+    {value: "FEMALE", label: "Weiblich"}
 
 ];
 
@@ -57,7 +55,7 @@ const NewStudent = ({group, update}) => {
      ************/
 
     return (
-        <div className={"w3-padding w3-small animate-left"}>
+        <div className={"w3-padding w3-small animate-left z2"}>
             <TextInput className={"d-inline-block"} label={"Vorname"} onChange={setFirstname} value={firstname} width={"33%"}/>
             <TextInput className={"d-inline-block"} label={"Nachname"} onChange={setLastname} value={lastname} width={"33%"}/>
             <div style={{width: "33%", display:"inline-block"}}>

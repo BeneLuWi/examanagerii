@@ -35,7 +35,6 @@ public class ResultController {
         List<Exam> myExams = examController.getMyExams();
         List<Group> myGroups = groupController.getMyGroups();
 
-
         return null;
     }
 

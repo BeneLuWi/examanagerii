@@ -100,7 +100,7 @@ const Results = ({}) => {
                 <span className={"w3-xxlarge"}>Klausurergebnisse</span>
             </div>
 
-            <div className={"animate-left"}>
+            <div className={"animate-left z2"}>
                 <h3>Klausurergebnisse eintragen für</h3>
                 <div className={"w3-row"}>
                     <div className={"w3-half"}>

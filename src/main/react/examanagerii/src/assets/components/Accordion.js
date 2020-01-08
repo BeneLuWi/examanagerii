@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import PropTypes from 'prop-types';
 import cl from "classnames";
 
-const Accordion = ({child, title}) => {
+const Accordion = ({child, title, expanded = true}) => {
 
     /***********
      *
@@ -10,7 +10,7 @@ const Accordion = ({child, title}) => {
      *
      ************/
 
-    const [expand, setExpand] = useState(true);
+    const [expand, setExpand] = useState(expanded);
 
     /***********
      *
@@ -25,11 +25,12 @@ const Accordion = ({child, title}) => {
      ************/
 
     return (
-        <div className={"accordion-wrapper w3-margin-top"}>
-            <h3 onClick={() => setExpand(!expand)}>{title}</h3>
+        <div className={"accordion-wrapper"}>
+            <h3 className={cl("accordion-title", {"opacity": expand})} onClick={() => setExpand(!expand)}>{title}</h3>
             <div className={cl("accordion", {"accordion-expand": expand})}>
                 {child}
             </div>
+            <hr/>
         </div>
     )
 

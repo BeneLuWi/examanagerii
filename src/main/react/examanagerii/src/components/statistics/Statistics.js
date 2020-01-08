@@ -6,6 +6,7 @@ import Accordion from "../../assets/components/Accordion";
 import ResultTable from "./ResultTable";
 import StatisticsTable from "./StatisticsTable";
 import Overview from "./Overview";
+import Descriptives from "./Descriptives";
 
 const Statistics = ({}) => {
 
@@ -84,7 +85,7 @@ const Statistics = ({}) => {
                 <span className={"w3-xxlarge"}>Statistiken</span>
             </div>
 
-            <div className={"animate-left"}>
+            <div className={"animate-left z2"}>
                 <h3>Statistiken für</h3>
                 <div className={"w3-row"}>
                     <div className={"w3-half"}>
@@ -117,7 +118,16 @@ const Statistics = ({}) => {
                     />
 
                     <Accordion
-                        title={"in Zahlen"}
+                        title={"Deskriptive Statistiken als Graphen"}
+                        child={
+                            <Descriptives
+                                statistics={statistics}
+                            />
+                        }
+                    />
+
+                    <Accordion
+                        title={"Deskriptive Statistiken in Zahlen"}
                         child={
                             <StatisticsTable
                                 statistics={statistics}

@@ -14,6 +14,8 @@ import java.util.stream.Collectors;
 
 public class Statistics {
 
+    private double totalReachable;
+
     private double avgTotal;
     private double avgMale;
     private double avgFemale;
@@ -147,7 +149,7 @@ public class Statistics {
         this.avgFemale = round(femaleTotal / (double) studentsFemale, false);
         this.avgMale =  round(maleTotal / (double) studentsMale, false);
 
-        double totalReachable = this.exam.getExercises()
+        this.totalReachable = this.exam.getExercises()
                 .stream()
                 .map(Exercise::getReachable)
                 .reduce(0.0, Double::sum);
@@ -175,6 +177,14 @@ public class Statistics {
         this.avgGradeTotal = round(total / (double) studentsTotal, false) ;
         this.avgGradeFemale = round(femaleTotal / (double) studentsFemale, false);
         this.avgGradeMale = round(maleTotal / (double) studentsMale, false);
+    }
+
+    public double getTotalReachable() {
+        return totalReachable;
+    }
+
+    public void setTotalReachable(double totalReachable) {
+        this.totalReachable = totalReachable;
     }
 
     public double getAvgGradeTotal() {

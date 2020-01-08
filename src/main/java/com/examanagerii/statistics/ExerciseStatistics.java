@@ -78,15 +78,15 @@ public class ExerciseStatistics {
             y[i] -= x[i];
         }
 
-        this.correlation = Statistics.round(new PearsonsCorrelation().correlation(x, y), true);
-
+        if (studentResults.size() < 2) {
+            this.correlation = 0;
+        } else {
+            this.correlation = Statistics.round(new PearsonsCorrelation().correlation(x, y), true);
+        }
 
         this.difficulty = Statistics.round((total / (studentResults.size() * reachable)) * 100, false);
 
     }
-
-
-
 
     private void initReachedLists(
             List<StudentResult> studentResults,
