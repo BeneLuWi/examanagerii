@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import PropTypes from 'prop-types';
 import cl from "classnames";
 import EditExam from "./EditExam";
 import Button from "../../assets/components/Button";

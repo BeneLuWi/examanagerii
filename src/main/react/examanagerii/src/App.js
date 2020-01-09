@@ -19,8 +19,8 @@ const App = () => {
             <div className={"w3-card-4 animate-top root-wrapper"}>
                 <div className={"w3-sidebar w3-blue w3-bar-block"} style={{minHeight: "100%"}}>
                     <Link to="/" className="w3-button w3-bar-item animate-left navigation"><h3>Examanager</h3></Link>
-                    <Link to={"/exam"} className={"w3-bar-item w3-button animate-left navigation"}>Klausuren</Link>
-                    <Link to={"/class"} className={"w3-bar-item w3-button animate-left navigation"}>Klassen</Link>
+                    <Link to={"/exams"} className={"w3-bar-item w3-button animate-left navigation"}>Klausuren</Link>
+                    <Link to={"/classes"} className={"w3-bar-item w3-button animate-left navigation"}>Klassen</Link>
                     <Link to={"/results"} className={"w3-bar-item w3-button animate-left navigation"}>Ergebnisse</Link>
                     <Link to={"/statistics"} className={"w3-bar-item w3-button animate-left navigation"}>Statistiken</Link>
                     <div className={"w3-bar-item"}/>
@@ -33,10 +33,10 @@ const App = () => {
                     <Route path={"/admin"} render={() =>
                         <Admin/>
                     }/>
-                    <Route path={"/class"} render={() =>
+                    <Route path={"/classes"} render={() =>
                         <Groups/>
                     }/>
-                    <Route path={"/exam"} render={() =>
+                    <Route path={"/exams"} render={() =>
                         <Exams/>
                     }/>
                     <Route path={"/statistics"} render={() =>

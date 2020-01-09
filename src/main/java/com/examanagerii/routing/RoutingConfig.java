@@ -9,25 +9,19 @@ public class RoutingConfig implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/edit")
-                .setViewName("forward:/");
-
         registry.addViewController("/statistics")
-                .setViewName("forward:/");
-
-        registry.addViewController("/students")
                 .setViewName("forward:/");
 
         registry.addViewController("/exams")
                 .setViewName("forward:/");
 
-        registry.addViewController("/user")
-                .setViewName("forward:/");
-
         registry.addViewController("/admin")
                 .setViewName("forward:/");
 
-        registry.addViewController("/class")
+        registry.addViewController("/classes")
+                .setViewName("forward:/");
+
+        registry.addViewController("/results")
                 .setViewName("forward:/");
     }
 
