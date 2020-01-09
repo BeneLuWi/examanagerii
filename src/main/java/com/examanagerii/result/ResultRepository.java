@@ -17,5 +17,11 @@ public interface ResultRepository extends MongoRepository<Result, String> {
 
     List<Result> findAllByExamId(String examId);
 
+    void deleteById(String id);
 
+    void deleteAllByStudentId(String id);
+
+    void deleteAllByExamId(String id);
+
+    void deleteAllByGroupId(String id);
 }

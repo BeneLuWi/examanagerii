@@ -110,6 +110,7 @@ const Results = ({}) => {
                                 result={studentResult.result}
                                 exam={exam}
                                 notify={setNotification}
+                                update={() => getGroup(groupOption.value, examOption.value)}
                             />
                         </li>
                     )}

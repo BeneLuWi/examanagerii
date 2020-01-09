@@ -73,7 +73,10 @@ const Groups = ({}) => {
                 <ul className={"w3-ul"}>
                     {groups.map(group =>
                         <li key={group.id} className={"animate-left"}>
-                            <GroupDetails group={group}/>
+                            <GroupDetails
+                                group={group}
+                                update={loadGroups}
+                            />
                         </li>
                     )}
                 </ul>

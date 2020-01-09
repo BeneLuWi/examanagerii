@@ -72,6 +72,12 @@ const EditStudent = ({update, close, student}) => {
                 onClick={updateStudent}
             />
             <Button
+                className={"w3-small w3-orange"}
+                label={"Löschen"}
+                onClick={() => {axios.delete("/api/students/delete/" + student.id); update();}}
+                confirm={true}
+            />
+            <Button
                 label={"Abbrechen"}
                 onClick={close}
             />

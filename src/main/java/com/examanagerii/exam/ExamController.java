@@ -69,4 +69,10 @@ public class ExamController {
         repository.save(exam);
     }
 
+    @DeleteMapping("/delete/{id}")
+    public void deleteGroup(@PathVariable("id") String id) {
+        repository.deleteById(id);
+        resultRepository.deleteAllByExamId(id);
+    }
+
 }

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import cl from "classnames";
 import EditExam from "./EditExam";
 import Button from "../../assets/components/Button";
+import axios from "axios";
 
 const ExamDetails = ({exam, update}) => {
 
@@ -47,6 +48,13 @@ const ExamDetails = ({exam, update}) => {
                 </h4>
                 {<Button label={"Bearbeiten"} onClick={() => {setExpandEdit(!expandEdit); setExpandDetails(false)}}/>}
                 {<Button label={"Details anzeigen"} onClick={() => {setExpandDetails(!expandDetails); setExpandEdit(false)}}/>}
+                {expandEdit &&
+                <Button
+                    className={"w3-small w3-orange"}
+                    label={"Löschen"}
+                    onClick={() => {axios.delete("/api/exams/delete/" + exam.id).then(update)}}
+                    confirm={true}
+                />}
             </div>
             {expandDetails &&
                 <div className={"w3-row-padding"}>

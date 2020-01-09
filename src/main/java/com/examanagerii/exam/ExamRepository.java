@@ -12,4 +12,5 @@ public interface ExamRepository extends MongoRepository<Exam, String> {
 
     List<Exam> findByUserId(String id);
 
+    void deleteById(String id);
 }

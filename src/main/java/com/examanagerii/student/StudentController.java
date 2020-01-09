@@ -57,6 +57,12 @@ public class StudentController {
 
     }
 
+    @DeleteMapping("/delete/{id}")
+    public void deleteGroup(@PathVariable("id") String id) {
+        repository.deleteById(id);
+        resultRepository.deleteAllByStudentId(id);
+    }
+
     @GetMapping("byGroupWithResult/{groupId}/{examId}")
     public List<StudentResult> getStudentsByGroupWithResult(@PathVariable("groupId") String groupId, @PathVariable("examId") String examId) {
 

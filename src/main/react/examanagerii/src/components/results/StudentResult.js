@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from 'react'
-import cl from "classnames";
 import Button from "../../assets/components/Button";
-import NumberInput from "../../assets/components/NumberInput";
 import StudentResultModal from "./StudentResultModal";
+import axios from "axios";
 
-const StudentResult = ({student, exam, result, notify}) => {
+const StudentResult = ({student, exam, result, notify, update}) => {
 
     /*************
      *
@@ -43,20 +42,23 @@ const StudentResult = ({student, exam, result, notify}) => {
                     disabled={!exam}
                 />
                 &nbsp;
-                <Button
-                    className={"w3-small w3-orange"}
-                    label={<span>&times;</span>}
-                    onClick={() => setShowModal(true)}
-                    nomargin={true}
-                    disabled={!result || result.totalReached === null}
-                />
+                {result &&
+                    <Button
+                        className={"w3-small w3-orange"}
+                        label={<span>&times;</span>}
+                        onClick={() => {axios.delete("/api/results/delete/" + result.id).then(update)}}
+                        nomargin={true}
+                        confirm={true}
+                        disabled={!result || result.totalReached === null}
+                    />
+                }
             </div>
 
             {showModal &&
                 <StudentResultModal
                     student={student}
                     exam={exam}
-                    close={() => setShowModal(false)}
+                    close={() => {setShowModal(false); update();}}
                     notify={notify}
                 />
             }

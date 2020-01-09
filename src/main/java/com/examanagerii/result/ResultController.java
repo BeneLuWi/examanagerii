@@ -66,6 +66,10 @@ public class ResultController {
         resultRepository.save(result);
     }
 
+    @DeleteMapping("delete/{id}")
+    public void removeResult(@PathVariable("id") String id) {
+        resultRepository.deleteById(id);
+    }
 
     @PutMapping("create")
     public void createResults(@RequestBody List<Result> results) {

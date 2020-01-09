@@ -1,6 +1,8 @@
 package com.examanagerii.group;
 
+import com.examanagerii.result.ResultRepository;
 import com.examanagerii.security.SecurityService;
+import com.examanagerii.student.StudentRepository;
 import com.examanagerii.user.ExaUser;
 import com.examanagerii.user.ExaUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,15 +27,21 @@ public class GroupController {
     @Autowired
     GroupRepository groupRepository;
 
+    @Autowired
+    ResultRepository resultRepository;
+
+    @Autowired
+    StudentRepository studentRepository;
+
     @GetMapping("/myGroups")
     public List<Group> getMyGroups() {
         ExaUser user = securityService.getCurrentAuthenticatedUser();
         return  user.getGroups().size() > 0 ?
-                   user
-                    .getGroups()
-                    .stream()
-                    .map(g -> groupRepository.findById(g).orElseThrow(() -> new NoSuchElementException(g)))
-                    .collect(Collectors.toList()) :
+                   user.getGroups()
+                            .stream()
+                            .map(g -> groupRepository.findById(g).orElse(null))
+                            .filter(Objects::nonNull)
+                            .collect(Collectors.toList()) :
                  Collections.emptyList();
     }
 
@@ -46,6 +54,13 @@ public class GroupController {
 
         user.addGroup(created.getId());
         userRepository.save(user);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteGroup(@PathVariable("id") String id) {
+        repository.deleteById(id);
+        studentRepository.deleteAllByGroupId(id);
+        resultRepository.deleteAllByGroupId(id);
     }
 
 }
