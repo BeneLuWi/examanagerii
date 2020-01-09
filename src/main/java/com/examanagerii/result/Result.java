@@ -2,10 +2,9 @@ package com.examanagerii.result;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
+import org.apache.commons.lang3.ArrayUtils;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Document(collection = "result")
 public class Result {
@@ -29,6 +28,29 @@ public class Result {
     }
 
 
+    public String[] toArray() {
+
+        this.totalReached = exercises
+                .stream()
+                .map(Exercise::getReached)
+                .reduce(0.0, Double::sum);
+
+        String[] result = new String[4];
+
+        result[0] = grade.getAsWord();
+        result[1] = Double.toString(grade.getAsGrade());
+        result[2] = String.valueOf(grade.getAsMss());
+        result[3] = Double.toString(totalReached);
+
+        return ArrayUtils.addAll(
+                result,
+                exercises
+                        .stream()
+                        .map(ex -> Double.toString(ex.getReached()))
+                        .toArray(String[]::new)
+        );
+    }
+
     public void updateExercises(List<Exercise> exercises) {
         exercises.forEach(exercise -> {
             Exercise currentEx = this.exercises.stream().filter(exOld -> exOld.getId().equals(exercise.getId()))
@@ -50,27 +72,24 @@ public class Result {
 
     }
 
-    public Grade getGrade(List<Double> ratings) {
-        double sumReachable = exercises
-                .stream()
-                .map(Exercise::getReachable)
-                .reduce(0.0, Double::sum);
-
-        double percentageReached = totalReached / sumReachable;
-
-        return new Grade((int) Math.round(percentageReached * 15.0));
-    }
-
     public void calcGrade(List<Double> ratings) {
         double sumReachable = exercises
                 .stream()
                 .map(Exercise::getReachable)
                 .reduce(0.0, Double::sum);
 
-        double percentageReached = totalReached / sumReachable;
+        double percentageReached = (totalReached / sumReachable) * 100;
 
-        this.grade = new Grade((int) Math.round(percentageReached * 15.0));
+        for (int i = 0; i < ratings.size(); i++) {
+            if (ratings.get(i) > percentageReached) {
+                this.grade = new Grade(i);
+                return;
+            }
+        }
+        this.grade = new Grade(15);
     }
+
+
 
     public String getId() {
         return id;

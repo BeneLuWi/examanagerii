@@ -5,6 +5,7 @@ import com.examanagerii.group.Group;
 import com.examanagerii.result.Exercise;
 import com.examanagerii.result.Result;
 import com.examanagerii.student.Student;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
 
 import java.util.ArrayList;
@@ -42,6 +43,9 @@ public class Statistics {
 
     private List<StudentResult> maleStudentsList;
     private List<StudentResult> femaleStudentsList;
+
+
+
 
 
     public Statistics(Exam exam, List<Result> results, List<Student> students) {

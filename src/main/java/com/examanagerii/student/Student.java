@@ -28,6 +28,11 @@ public class Student {
         this.gender = gender;
     }
 
+
+    public String[] toArray() {
+        return new String[]{lastname, firstname, gender.equals("MALE") ? "m" : "w"};
+    }
+
     public String getId() {
         return id;
     }

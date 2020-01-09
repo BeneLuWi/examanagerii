@@ -2,6 +2,7 @@ package com.examanagerii.statistics;
 
 import com.examanagerii.exam.Exam;
 import com.examanagerii.exam.ExamRepository;
+import com.examanagerii.result.Exercise;
 import com.examanagerii.result.Result;
 import com.examanagerii.result.ResultRepository;
 import com.examanagerii.student.Student;
@@ -11,6 +12,7 @@ import com.opencsv.CSVWriterBuilder;
 import com.opencsv.ICSVWriter;
 import com.opencsv.bean.StatefulBeanToCsv;
 import com.opencsv.bean.StatefulBeanToCsvBuilder;
+import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -22,6 +24,7 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -81,7 +84,37 @@ public class StatisticsController {
                 .withSeparator(';')
                 .build();
 
-        String[] studentsArray = students.stream().map(Student::getFirstname).toArray(String[]::new);
+
+        List<String[]> csvOutput = new ArrayList<>();
+
+        // First Section
+        String[] studentNamesHeader = {"Nachname", "Vorname", "Geschlecht", "Note", "Note (differenziert)", "MSS", "Gesamtpunkte"};
+
+        String[] firstSectionHeader = ArrayUtils.addAll(
+                studentNamesHeader,
+                exam.getExercises()
+                .stream()
+                .map(Exercise::getName)
+                .toArray(String[]::new)
+        );
+
+        Statistics statistics = new Statistics(exam, results, students);
+
+        List<String[]> firstSectionContent = statistics.getStudentResults()
+                .stream()
+                .map(studentResult ->
+                        ArrayUtils.addAll(
+                                studentResult.getStudent().toArray(),
+                                studentResult.getResult().toArray()
+                        ))
+                .collect(Collectors.toList());
+
+
+        csvOutput.add(firstSectionHeader);
+        csvOutput.addAll(firstSectionContent);
+
+
+        writer.writeAll(csvOutput);
 
     }
 
