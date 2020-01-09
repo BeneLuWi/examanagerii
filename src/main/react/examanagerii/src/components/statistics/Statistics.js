@@ -82,11 +82,19 @@ const Statistics = ({}) => {
     return (
         <div className={"content-wrapper animate-left"}>
             <div>
-                <span className={"w3-xxlarge"}>Statistiken</span>
+                <span className={"w3-xxlarge"}>
+                    Statistiken&nbsp;
+                    {statistics &&
+                    <a target={"_blank"} href={`/api/statistics/downloadCsv/${exam.id}/${group.id}`} className={"w3-blue w3-btn w3-small"}>
+                        Herunterladen
+                    </a>
+                    }
+                </span>
             </div>
 
             <div className={"animate-left z2"}>
-                <h3>Statistiken für</h3>
+                <h3>Statistiken für
+                </h3>
                 <div className={"w3-row"}>
                     <div className={"w3-half"}>
                         <Select
@@ -104,12 +112,6 @@ const Statistics = ({}) => {
                     </div>
                 </div>
             </div>
-
-            {statistics &&
-            <a target={"_blank"} href={`/api/statistics/downloadCsv/${exam.id}/${group.id}`} className={"w3-blue w3-btn"}>
-                Herunterladen
-            </a>
-            }
 
             {statistics &&
                 <div className={"w3-animate-opacity w3-padding-bottom"}>

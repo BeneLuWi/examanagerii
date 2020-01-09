@@ -58,8 +58,8 @@ const UserRegistration = ({}) => {
                     onChange={e => setPassword(e.target.value)}
                     placeholder={"Password"}
                 />
-                <p className={"fancy"}>
-                    <label htmlFor={"isAdmin"} className={"fancy"}>
+                <p>
+                    <label htmlFor={"isAdmin"}>
                         <input
                             id={"isAdmin"}
                             type={"checkbox"}
