@@ -3,8 +3,11 @@ package com.examanagerii.result;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.apache.commons.lang3.ArrayUtils;
+
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @Document(collection = "result")
 public class Result {
@@ -30,6 +33,10 @@ public class Result {
 
     public String[] toArray() {
 
+        Locale fmtLocale = Locale.getDefault(Locale.Category.FORMAT);
+        NumberFormat formatter = NumberFormat.getInstance(fmtLocale);
+        formatter.setMaximumFractionDigits(1);
+
         this.totalReached = exercises
                 .stream()
                 .map(Exercise::getReached)
@@ -38,15 +45,15 @@ public class Result {
         String[] result = new String[4];
 
         result[0] = grade.getAsWord();
-        result[1] = Double.toString(grade.getAsGrade());
+        result[1] = formatter.format(grade.getAsGrade());
         result[2] = String.valueOf(grade.getAsMss());
-        result[3] = Double.toString(totalReached);
+        result[3] = formatter.format(totalReached);
 
         return ArrayUtils.addAll(
                 result,
                 exercises
                         .stream()
-                        .map(ex -> Double.toString(ex.getReached()))
+                        .map(ex -> formatter.format(ex.getReached()))
                         .toArray(String[]::new)
         );
     }

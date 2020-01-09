@@ -8,8 +8,10 @@ import com.examanagerii.student.Student;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
@@ -44,7 +46,61 @@ public class Statistics {
     private List<StudentResult> maleStudentsList;
     private List<StudentResult> femaleStudentsList;
 
+    public List<String[]> toArray() {
 
+        List<String[]> statisticList = new ArrayList<>();
+
+        Locale fmtLocale = Locale.getDefault(Locale.Category.FORMAT);
+        NumberFormat formatter = NumberFormat.getInstance(fmtLocale);
+        NumberFormat formatter2 = NumberFormat.getInstance(fmtLocale);
+        formatter.setMaximumFractionDigits(1);
+        formatter2.setMaximumFractionDigits(2);
+
+
+
+        // Average Total Reached Points
+        String[] avgTotalStart = {"Durchschnittliche Punktzahl", formatter.format(avgTotal)};
+        statisticList.add(ArrayUtils.addAll(
+                avgTotalStart,
+                exerciseStatistics.stream().map(ex -> formatter.format(ex.getAvgTotal())).toArray(String[]::new)
+        ));
+
+        String[] avgFemaleStart = {"Durchschnittliche Punktzahl w", formatter.format(avgFemale)};
+        statisticList.add(ArrayUtils.addAll(
+                avgFemaleStart,
+                exerciseStatistics.stream().map(ex -> formatter.format(ex.getAvgFemale())).toArray(String[]::new)
+        ));
+
+        String[] avgMaleStart = {"Durchschnittliche Punktzahl m", formatter.format(avgMale)};
+        statisticList.add(ArrayUtils.addAll(
+                avgMaleStart,
+                exerciseStatistics.stream().map(ex -> formatter.format(ex.getAvgMale())).toArray(String[]::new)
+        ));
+
+
+        // Difficulty
+        String[] difficultyStart = {"Schwierigkeit", formatter.format(difficulty)};
+        statisticList.add(ArrayUtils.addAll(
+                difficultyStart,
+                exerciseStatistics.stream().map(ex -> formatter.format(ex.getDifficulty())).toArray(String[]::new)
+        ));
+
+        // Correlation
+        String[] correlationStart = {"Trennschärfe", ""};
+        statisticList.add(ArrayUtils.addAll(
+                correlationStart,
+                exerciseStatistics.stream().map(ex -> formatter2.format(ex.getCorrelation())).toArray(String[]::new)
+        ));
+
+        // Deviation
+        String[] deviationStart = {"Standardabweichung", formatter.format(deviation)};
+        statisticList.add(ArrayUtils.addAll(
+                deviationStart,
+                exerciseStatistics.stream().map(ex -> formatter2.format(ex.getDeviation())).toArray(String[]::new)
+        ));
+
+        return statisticList;
+    }
 
 
 

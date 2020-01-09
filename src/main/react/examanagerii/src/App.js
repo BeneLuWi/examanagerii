@@ -23,7 +23,9 @@ const App = () => {
                     <Link to={"/class"} className={"w3-bar-item w3-button animate-left navigation"}>Klassen</Link>
                     <Link to={"/results"} className={"w3-bar-item w3-button animate-left navigation"}>Ergebnisse</Link>
                     <Link to={"/statistics"} className={"w3-bar-item w3-button animate-left navigation"}>Statistiken</Link>
-                    <Link to={"/class"} className={"w3-bar-item w3-button animate-left navigation"}>Logout</Link>
+                    <form method="POST" action="/perform_logout">
+                        <button className={"w3-bar-item w3-button animate-left navigation"}>Logout</button>
+                    </form>
                 </div>
 
                 <div className={"w3-white"} style={{marginLeft: 200, minHeight: "100%"}}>
