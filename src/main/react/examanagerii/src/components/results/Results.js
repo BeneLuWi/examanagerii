@@ -20,9 +20,7 @@ const Results = ({}) => {
     const [group, setGroup] = useState([]);
     const [groupOption, setGroupOption] = useState(null);
 
-    const [selectedStudent, setSelectedStudent] = useState(null);
-    const [result, setResult] = useState(null);
-
+    const [studentReachedPoints, setStudentReachedPoints] = useState(null);
 
     const [notification, setNotification] = useState([false, "", true]);
 
@@ -46,46 +44,29 @@ const Results = ({}) => {
             .catch(() => setNotification([true, "Fehler beim Laden der Klassen"]))
     };
 
-    const sendResult = () => {
-        const data = {
-            studentId: selectedStudent.id,
-            examId: exam.id,
-            groupId: group.id,
-            exercises: selectedStudent.exercises
-        };
-
-        axios.post("/api/results/create")
-            .then(() => getGroup(group.id))
-            .catch(() => setNotification([true, "Fehler beim Speichern"]))
-
-    };
-
-    const getResults = () => {
-        axios.get("/api/results/myResults")
-            .then(res => setAllExams(res.data))
-            .catch(() => setNotification([true, "Fehler beim Laden der Ergebnisse", false]))
-    };
-
-    const getGroup = (id) => {
-        axios.get("/api/students/byGroup/" + id)
-            .then(res => setGroup(res.data))
-            .catch(() => setNotification([true, "Fehler beim Laden der Klassen", false]))
+    const getGroup = (groupId, examId) => {
+        if (!examId)
+            axios.get("/api/students/byGroupAsResult/" + groupId)
+                .then(res => setGroup(res.data))
+                .catch(() => setNotification([true, "Fehler beim Laden der Klassen", false]))
+        else
+            axios.get("/api/students/byGroupWithResult/" + groupId + "/" + examId)
+                .then(res => setGroup(res.data))
+                .catch(() => setNotification([true, "Fehler beim Laden der Klassen", false]))
     };
 
     const selectGroup = (opt) => {
         setGroupOption(opt);
-        getGroup(opt.value);
+        getGroup(opt.value, exam ? exam.id: null);
     };
 
     const selectExam = (opt) => {
         setExamOption(opt);
+        group && getGroup(groupOption.value, opt.value);
         setExam(allExams.find(e => e.id === opt.value));
     };
 
-    const handleStudentResultChange = (points, id) => {
 
-
-    };
 
     /*************
      *
@@ -121,23 +102,27 @@ const Results = ({}) => {
             </div>
 
             <div className={"w3-row"}>
-                <ul className={"w3-ul w3-half w3-border"}>
-                    {group.map(student =>
-                        <li key={student.id} className="w3-display-container">
+                <ul className={"w3-ul w3-half w3-border w3-margin-top"}>
+                    {group.map(studentResult =>
+                        <li key={studentResult.student.id}>
                             <StudentResult
-                                student={student}
+                                student={studentResult.student}
+                                result={studentResult.result}
                                 exam={exam}
                                 notify={setNotification}
                             />
                         </li>
                     )}
                 </ul>
-                <ul className={"w3-ul w3-half w3-right w3-border"}>
+                <ul className={"w3-ul w3-half w3-right w3-border w3-margin-top"}>
                     {exam && exam.exercises.map(ex =>
                         <li key={ex.id}>
-                            {ex.name}: {ex.reachable}
+                            {ex.name}: <span className={"w3-large"}>{ex.reachable}</span> Punkte
                         </li>
                     )}
+                    {exam &&
+                        <li>Gesamt: <span className={"w3-large"}>{exam.reachable}</span> Punkte</li>
+                    }
                 </ul>
             </div>
             {notification[0] &&

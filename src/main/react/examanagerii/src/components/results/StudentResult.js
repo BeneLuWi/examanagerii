@@ -4,7 +4,7 @@ import Button from "../../assets/components/Button";
 import NumberInput from "../../assets/components/NumberInput";
 import StudentResultModal from "./StudentResultModal";
 
-const StudentResult = ({student, exam, selectStudent, notify}) => {
+const StudentResult = ({student, exam, result, notify}) => {
 
     /*************
      *
@@ -28,8 +28,12 @@ const StudentResult = ({student, exam, selectStudent, notify}) => {
 
 
     return (
-        <div className={"w3-display-container"} style={{height: 20}}>
-            <div className={"w3-display-left w3-padding"}>{student.firstname} {student.lastname}</div>
+        <div className={"w3-display-container w3-padding"} style={{height: 30}}>
+            <div className={"w3-display-left"}>{student.firstname} {student.lastname}</div>
+            {result && result.totalReached ?
+                <div className={"w3-display-middle"}>{result.totalReached} Punkte</div>
+                :<div className={"w3-display-middle"}>Kein Ergebnis</div>
+            }
             <Button
                 className={"w3-display-right"}
                 label={"Eintragen"}

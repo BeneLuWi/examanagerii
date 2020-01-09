@@ -69,6 +69,7 @@ const ExamDetails = ({exam, update}) => {
                                     {ex.name}: <span className={"w3-large"}>{ex.reachable}</span> Punkte
                                 </li>
                             )}
+                            <li>Gesamt: <span className={"w3-large"}>{exam.reachable}</span> Punkte</li>
                         </ul>
                     </div>
                 </div>

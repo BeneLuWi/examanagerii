@@ -17,6 +17,7 @@ public class Exam {
     private List<Exercise> exercises = new ArrayList<>();
     private List<Double> ratings = new ArrayList<>(15);
     private String userId;
+    private double reachable;
 
     public Exam() {
     }
@@ -66,11 +67,22 @@ public class Exam {
         this.name = name;
     }
 
+    public double getReachable() {
+        return reachable;
+    }
+
+    public void setReachable(double reachable) {
+        this.reachable = reachable;
+    }
+
     public List<Exercise> getExercises() {
         return exercises;
     }
 
     public void setExercises(List<Exercise> exercises) {
         this.exercises = exercises;
+        this.reachable = exercises.stream()
+                .map(Exercise::getReachable)
+                .reduce(0.0, Double::sum);
     }
 }
