@@ -48,7 +48,7 @@ const Students = ({group}) => {
                 {showNew && <NewStudent group={group} update={loadStudents}/>}
                 {students.map(student =>
                     <li
-                        className={"animate-left"}
+                        className={"animate-top"}
                         key={student.id}>
                         <Student student={student} update={loadStudents}/>
                     </li>

@@ -34,6 +34,7 @@ const Groups = ({}) => {
             .then(() => {
                 setNotification([true, "Gespeichert", true]);
                 setName("");
+                setDescription("");
                 loadGroups();
             })
             .catch(() => setNotification([true, "Fehler beim Speichern", false]))

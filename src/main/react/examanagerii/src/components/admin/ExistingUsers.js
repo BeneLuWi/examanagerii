@@ -49,7 +49,8 @@ const ExistingUsers = ({}) => {
                         {user.username}
                         <button
                             className={"w3-button w3-small w3-right"}
-                            onClick={() => deleteUser(user.username)}>
+                            onClick={() => deleteUser(user.username)}
+                            disabled={user.username === "admin"}>
                             Löschen
                         </button>
                     </li>
