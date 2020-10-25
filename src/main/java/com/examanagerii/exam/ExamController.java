@@ -1,5 +1,6 @@
 package com.examanagerii.exam;
 
+import com.examanagerii.result.Exercise;
 import com.examanagerii.result.Result;
 import com.examanagerii.result.ResultRepository;
 import com.examanagerii.security.SecurityService;
@@ -64,6 +65,10 @@ public class ExamController {
         List<Result> results = resultRepository.findAllByExamId(exam.getId());
 
         results.forEach(result -> result.updateExercises(exam.getExercises()));
+
+        exam.setReachable(exam.getExercises().stream()
+                .map(Exercise::getReachable)
+                .reduce(0.0, Double::sum));
 
         resultRepository.saveAll(results);
         repository.save(exam);
