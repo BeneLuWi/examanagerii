@@ -34,7 +34,7 @@ const ExamRatings = ({ratings, setRatings}) => {
             {ratings.map((r, index) =>
                 <div className={"animate-left"}>
                     <NumberInput
-                        label={`min. % für ${index} MSS-Punkte`}
+                        label={`min. % für ${index + 1} MSS-Punkte`}
                         value={r}
                         index={index}
                         setValue={handleChange}
