@@ -106,6 +106,48 @@ const Overview = ({statistics}) => {
                     />
                 </div>
             </div>
+            <hr/>
+            <div className={"w3-row-padding"}>
+                <div className={"w3-half"}>
+                    <h4>Notenverteilung (in %)</h4>
+                </div>
+            </div>
+            <div className={"w3-row-padding"}>
+                <div className={"w3-half "}>
+                    <Bar
+                        data={{
+                            labels: ["Sehr gut", "Gut", "Befriedigend", "Ausreichend", "Mangehaft", "Ungenügend"],
+                            datasets: [
+                                {
+                                    label:"Gesamt",
+                                    data: statistics.distribution,
+                                    backgroundColor:'#278500'
+                                },
+                                {
+                                    label: "Mädchen",
+                                    data: statistics.distributionFemale,
+                                    backgroundColor: '#ff2549'
+                                },
+                                {
+                                    label:"Jungen",
+                                    data: statistics.distributionMale,
+                                    backgroundColor: '#36A2EB'
+                                }
+                            ],
+                        }}
+                        options={{
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        min: 0,
+                                        max: 100,
+                                        stepSize: 10
+                                    }
+                                }]
+                            }}}
+                    />
+                </div>
+            </div>
         </div>
     )
 

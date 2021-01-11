@@ -44,6 +44,8 @@ public class Statistics {
     private List<StudentResult> femaleStudentsList;
 
     private double[] distribution;
+    private double[] distributionMale;
+    private double[] distributionFemale;
 
     public List<String[]> toArray() {
 
@@ -219,16 +221,35 @@ public class Statistics {
 
     private void calcDistribution() {
         this.distribution = new double[6];
+        this.distributionMale = new double[6];
+        this.distributionFemale = new double[6];
         double total = 0.0;
+        double totalMale = 0.0;
+        double totalFemale = 0.0;
         for (StudentResult s : this.studentResults) {
             int index = (int) Math.round(s.getResult().getGrade().getAsGrade());
             distribution[index == 0 ? 0 : index - 1]++;
+            if (s.getStudent().getGender().equals("MALE")) {
+                distributionMale[index == 0 ? 0 : index - 1]++;
+                totalMale++;
+            } else {
+                distributionFemale[index == 0 ? 0 : index - 1]++;
+                totalFemale++;
+            }
             total++;
         }
 
         double finalTotal = total;
         this.distribution = Arrays.stream(this.distribution)
-                .map(dist -> Statistics.round(dist/ finalTotal, true))
+                .map(dist -> Statistics.round((dist/finalTotal) * 100.0, true))
+                .toArray();
+        double finalTotalMale = totalMale;
+        this.distributionMale = Arrays.stream(this.distributionMale)
+                .map(dist -> Statistics.round((dist/ finalTotalMale) * 100.0, true))
+                .toArray();
+        double finalTotalFemale = totalFemale;
+        this.distributionFemale = Arrays.stream(this.distributionFemale)
+                .map(dist -> Statistics.round((dist/ finalTotalFemale) * 100.0, true))
                 .toArray();
 
     }
@@ -413,5 +434,13 @@ public class Statistics {
 
     public void setExerciseStatistics(List<ExerciseStatistics> exerciseStatistics) {
         this.exerciseStatistics = exerciseStatistics;
+    }
+
+    public double[] getDistributionMale() {
+        return distributionMale;
+    }
+
+    public double[] getDistributionFemale() {
+        return distributionFemale;
     }
 }

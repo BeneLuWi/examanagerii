@@ -135,6 +135,28 @@ const Statistics = ({}) => {
                     />
 
                     <Accordion
+                        title={<div>Beschreibung der deskriptiven Statistiken</div>}
+                        expanded={false}
+                        child={
+                            <ul className={"w3-ul"}>
+                                <li>
+                                    <span className={"w3-xlarge"}>Standardabweichung</span><br/>
+                                    Der	Mittelwert stellt	eine	Repräsentation	einer	Datengruppe	dar.	Die	einzelnen	Daten	liegen um	diesen	Mittelwert	herum	verteilt,	sie	streuen	um	den	Mittelwert. Die	Standardabweichung	gibt	die	mittlere	Streuung	der	Einzelwerte	um	den	Mittelwert	an.Je	größer	der	Wert,	desto	mehr	weichen	die	Einzelergebnisse	vom	Mittelwert	ab.
+                                </li>
+                                <li>
+                                    <span className={"w3-xlarge"}>Schwierigkeit</span><br/>
+                                    Die Schwierigkeit wird anhand der erreichten Punkte für die Klausur und für die einzelnen Aufgaben errechnet.
+                                    Je	höher	der	Wert	(maximal	100),	desto	<strong>geringer</strong>	die	Schwierigkeit,	resp.	ein Wert	um	50	signalisiert	eine	mittlere	Schwierigkeit.
+                                </li>
+                                <li>
+                                    <span className={"w3-xlarge"}>Trennschärfe</span><br/>
+                                    Bei	der	Trennschärfe (part-whole Korrelation) wird	die	Korrelation	der	einzelnen	Aufgabe	zum Gesamtergebnis	ohne	das	Ergebnis	der	betrachteten	Einzelaufgabe	berechnet.	Die	Trennschärfe	ist	ein	Maß	zur	Überprüfung,	inwieweit	eine	Aufgabe	geeignet	ist,	zwischen	Schülerinnnen	und	Schülern	mit	hoher	und	niedriger	Leistung	zu	unterschieden.	Dabei	wird der	jeweilige	Aufgabenwert	in	Bezug	(Korrelation)	zum	Gesamtergebnis	gebracht.
+                                </li>
+                            </ul>
+                        }
+                    />
+
+                    <Accordion
                         title={"Deskriptive Statistiken in Zahlen"}
                         child={
                             <StatisticsTable
@@ -162,6 +184,6 @@ const Statistics = ({}) => {
         </div>
     )
 
-};
+}
 
 export default Statistics
