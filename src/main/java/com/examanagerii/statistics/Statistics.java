@@ -9,10 +9,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
 
 import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.NoSuchElementException;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Statistics {
@@ -45,6 +42,8 @@ public class Statistics {
 
     private List<StudentResult> maleStudentsList;
     private List<StudentResult> femaleStudentsList;
+
+    private double[] distribution;
 
     public List<String[]> toArray() {
 
@@ -164,7 +163,7 @@ public class Statistics {
         calcStudents();
         calcAverageGrade();
         calcAveragePoints();
-
+        calcDistribution();
     }
 
     private void calcStudents() {
@@ -218,6 +217,22 @@ public class Statistics {
 
     }
 
+    private void calcDistribution() {
+        this.distribution = new double[6];
+        double total = 0.0;
+        for (StudentResult s : this.studentResults) {
+            int index = (int) Math.round(s.getResult().getGrade().getAsGrade());
+            distribution[index == 0 ? 0 : index - 1]++;
+            total++;
+        }
+
+        double finalTotal = total;
+        this.distribution = Arrays.stream(this.distribution)
+                .map(dist -> Statistics.round(dist/ finalTotal, true))
+                .toArray();
+
+    }
+
     private void calcAverageGrade() {
         double total = this.studentResults
                 .stream()
@@ -237,6 +252,14 @@ public class Statistics {
         this.avgGradeTotal = round(total / (double) studentsTotal, false) ;
         this.avgGradeFemale = round(femaleTotal / (double) studentsFemale, false);
         this.avgGradeMale = round(maleTotal / (double) studentsMale, false);
+    }
+
+    public double[] getDistribution() {
+        return distribution;
+    }
+
+    public void setDistribution(double[] distribution) {
+        this.distribution = distribution;
     }
 
     public double getTotalReachable() {
